@@ -3,8 +3,6 @@ import re
 from tkinter import messagebox, filedialog, Tk
 from pypdf import PdfReader, PdfWriter
 
-dirname = os.path.dirname(__file__) 
-iDir = os.path.abspath(dirname) 
 root = Tk()
 root.withdraw()
 
@@ -13,6 +11,8 @@ def files_reading():
     ファイルの読み込み
     読み込まれたファイルのリストを返す
     """
+    dirname = os.path.dirname(__file__) 
+    iDir = os.path.abspath(dirname) 
     files_read = filedialog.askopenfilenames(
         title='開く',
         filetypes=[("PDF file","*.pdf")], 
