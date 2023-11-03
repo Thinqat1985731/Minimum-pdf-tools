@@ -41,7 +41,7 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 
 2023/11/03
 * MITライセンスの付与
-* readme.md修正
+* .gitignore/readme.md修正
 
 ## Author
 <div align="center">
@@ -50,5 +50,5 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 </div>
 
 
-# Lisence
+## Lisence
 This project is licensed under the MIT License, see the LICENSE file for details
