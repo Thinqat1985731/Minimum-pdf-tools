@@ -1,23 +1,21 @@
-# Pdf-tools
+# UIadder-for-PDFtools
 
 ## Overview
-pypdfを使ってみたかっただけのガバガバツールです（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
+pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツール（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
 
 ## Requirement
-- pypdf
+  - pypdf
+  - charset-normalizer
+  - chardet
+  - cchardet
 
 ## Usage
-個々のディレクトリに入っているmain.pyをランチャーとかで実行。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。
-mergerは保存名聞いてきますが既にあるやつに上書きしようとするとバグります。
+
+Requirementにあるパッケージを入れたPython環境（仮想でも生でもよい）とGhostscriptをまずは用意し、そのうえで個々のディレクトリに入っているmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。<br>
+mergerは保存名聞いてきますが、既にあるやつに上書きしようとするとバグります。
 
 ## Features
-データが無いときに警告したり、pdf-mergerで保存時に.pdf付け忘れた場合に勝手に付け足すくらいしかないです。あとは巷に転がっている感じのやつ。
-
-## Author
-<div style="text-align: center;">
-<img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="20%"><br>
-<strong>Thinqat(Thinqat1985731)</strong>
-</div>
+データが無いときに警告したり、pdf-mergerで保存時に.pdf付け忘れた場合に勝手に付け足すくらいしかないです。
 
 ## History
 2023/4/2
@@ -33,3 +31,24 @@ mergerは保存名聞いてきますが既にあるやつに上書きしよう�
 * 読み込みの仕様により逆順になる場合に対しての並べ替え機能追加
 * 上記に伴う確認メッセージ追加
 * Python自体の終了処理をより追加 (削除時のCOM surrogate防止)
+
+2023/10/22
+* gitignoreを追加
+* ghostscriptにUIを付けるためのpdf-compressor追加
+
+2023/10/23
+* linter/formatterでコードを整理
+
+2023/11/03
+* MITライセンスの付与
+* readme.md修正
+
+## Author
+<div align="center">
+<img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="10%"><br>
+<strong>Thinqat(Thinqat1985731)</strong>
+</div>
+
+
+# Lisence
+This project is licensed under the MIT License, see the LICENSE file for details
