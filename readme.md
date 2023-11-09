@@ -5,6 +5,7 @@ pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとし
 
 ## Requirement
   - pypdf
+  - send2trash
   - charset-normalizer
   - chardet
   - cchardet
