@@ -116,7 +116,7 @@ def option(files_read, file_name_save):
     if compress == "yes":
         root_s = Tk()
         root_s.geometry('250x240')
-        root_s.title("pdf-compressor")
+        root_s.title("pdf-merger")
 
         radio_var = StringVar(root_s)
 
@@ -184,20 +184,21 @@ def option(files_read, file_name_save):
 
         print(radio_var.get())
 
-        for file_name in files_read:
-            pdf_file_name = file_name.replace(".pdf", "_compressed.pdf")
-            subprocess.check_output(
-                [
-                    "gswin64c",
-                    "-sDEVICE=pdfwrite",
-                    "-dPDFSETTINGS=%s" % (radio_var.get()),
-                    "-dBATCH",
-                    "-dNOPAUSE",
-                    "-dSAFER",
-                    "-sOUTPUTFILE=%s" % (pdf_file_name,),
-                    file_name,
-                ]
-            )
+        file_name_temp = file_name_save.replace(".pdf", "_.pdf")
+        subprocess.check_output(
+            [
+                "gswin64c",
+                "-sDEVICE=pdfwrite",
+                "-dPDFSETTINGS=/default",
+                "-dBATCH",
+                "-dNOPAUSE",
+                "-dSAFER",
+                "-sOUTPUTFILE=%s" % (file_name_temp,),
+                file_name_save,
+            ]
+        )
+        os.remove(file_name_save)
+        file_name_temp.replace("_.pdf", ".pdf")
 
     messagebox.showinfo("Pdf-compressor", "処理が完了しました。")
     root.destroy()
