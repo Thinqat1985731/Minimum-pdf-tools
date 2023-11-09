@@ -131,6 +131,8 @@ venv.bak/
 # rye settings
 .python-version
 pyproject.toml
+requirements.lock
+requirements_dev.lock
 
 # Spyder project settings
 .spyderproject

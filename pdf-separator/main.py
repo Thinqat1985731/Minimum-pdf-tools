@@ -1,5 +1,8 @@
+# Standard Library
 import sys
-from separator_func import files_reading, checking, separating
+
+# Third Party Library
+from separator_func import checking, files_reading, separating
 
 files_read = files_reading()
 filse_read = checking(files_read=files_read)

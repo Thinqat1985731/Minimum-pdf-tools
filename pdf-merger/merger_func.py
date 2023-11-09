@@ -1,7 +1,12 @@
+# Standard Library
 import os
+import subprocess
 import sys
-from tkinter import messagebox, filedialog, Tk
+from tkinter import Tk, filedialog, messagebox
+
+# Third Party Library
 from pypdf import PdfWriter
+from send2trash import send2trash
 
 dirname = os.path.dirname(__file__)
 iDir = os.path.abspath(dirname)
@@ -30,12 +35,12 @@ def checking(files_read):
         files_found = files_found + file_name + "\n"
 
     if files_read != "":  # ファイルが存在する場合
-        yes_no = messagebox.askquestion(
+        reverse = messagebox.askquestion(
             "Pdf-merger",
             "現在の状態では以下の" + str(len(files_read)) + "個のファイルが以下の順番で結合されます：\n" + files_found + "\n逆順に並べ替えますか?",
         )
 
-        if yes_no == "yes":
+        if reverse == "yes":
             files_read = list(reversed(files_read))
         else:
             files_read = files_read
@@ -80,6 +85,46 @@ def merging(files_read):
 
     pdf_file_merger.write(file_name_save)
     pdf_file_merger.close()  # writer を閉じる
+
+    return file_name_save
+
+
+def option(files_read, file_name_save):
+    """
+    結合後のオプション機能
+    """
+    delete = messagebox.askquestion(
+        "Pdf-merger",
+        "結合に使用したPDFをゴミ箱に移動しますか？",
+    )
+
+    if delete == "yes":
+        for file_name in files_read:
+            file_name_delete = file_name.replace("/", "\\")  # get_short_path_name() に対応
+            send2trash(file_name_delete)
+
+    compress = messagebox.askquestion(
+        "Pdf-merger",
+        "結合後のPDFを圧縮しますか？（GhostScriptが必要）",
+    )
+
+    if compress == "yes":
+        file_name_temp = file_name_save.replace(".pdf", "_.pdf")
+        subprocess.check_output(
+            [
+                "gswin64c",
+                "-sDEVICE=pdfwrite",
+                "-dPDFSETTINGS=/default",
+                "-dBATCH",
+                "-dNOPAUSE",
+                "-dSAFER",
+                "-sOUTPUTFILE=%s" % (file_name_temp,),
+                file_name_save,
+            ]
+        )
+        os.remove(file_name_save)
+        file_name_temp.replace("_.pdf", ".pdf")
+
     messagebox.showinfo("Pdf-merger", "処理が完了しました。")
     root.destroy()
     return

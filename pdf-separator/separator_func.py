@@ -1,6 +1,9 @@
+# Standard Library
 import os
 import sys
-from tkinter import messagebox, filedialog, Tk
+from tkinter import Tk, filedialog, messagebox
+
+# Third Party Library
 from pypdf import PdfReader, PdfWriter
 
 root = Tk()

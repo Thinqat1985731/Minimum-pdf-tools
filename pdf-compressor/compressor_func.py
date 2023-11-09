@@ -1,7 +1,8 @@
+# Standard Library
 import os
-import sys
 import subprocess
-from tkinter import messagebox, filedialog, Tk
+import sys
+from tkinter import Tk, filedialog, messagebox
 
 dirname = os.path.dirname(__file__)
 iDir = os.path.abspath(dirname)

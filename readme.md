@@ -43,6 +43,10 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 * MITライセンスの付与
 * .gitignore/readme.md修正
 
+2023/11/09
+* isortでモジュール整理
+* pdf-merger後に圧縮/結合元ファイルのゴミ箱送りのオプションを追加
+
 ## Author
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="10%"><br>
