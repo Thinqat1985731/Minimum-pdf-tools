@@ -2,7 +2,7 @@
 import os
 import subprocess
 import sys
-from tkinter import Tk, filedialog, messagebox
+from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog, messagebox
 
 dirname = os.path.dirname(__file__)
 iDir = os.path.abspath(dirname)
@@ -50,16 +50,85 @@ def checking(files_read):
 
 def compressing(files_read):
     """
-    ghostscriptを拝借した圧縮の本体
+    ghostscriptを拝借した圧縮の本体。設定ウィンドウもあるよ。
     """
+    root_s = Tk()
+    root_s.geometry('250x240')
+    root_s.title("pdf-compressor")
+
+    radio_var = StringVar(root_s)
+
+    radio1 = Radiobutton(
+        root_s,
+        value="/default",
+        variable=radio_var,
+        text="/default"
+    )
+    radio1.pack()
+    radio1.place(x=20, y=60)
+
+    radio2 = Radiobutton(
+        root_s,
+        value="/screen",
+        variable=radio_var,
+        text="/screen"
+    )
+    radio2.pack()
+    radio2.place(x=20, y=82)
+
+    radio3 = Radiobutton(
+        root_s,
+        value="/ebook",
+        variable=radio_var,
+        text="/ebook"
+    )
+    radio3.pack()
+    radio3.place(x=20, y=104)
+
+    radio4 = Radiobutton(
+        root_s,
+        value="/printer",
+        variable=radio_var,
+        text="/printer"
+    )
+    radio4.pack()
+    radio4.place(x=20, y=126)
+
+    radio5 = Radiobutton(
+        root_s,
+        value="/prepress",
+        variable=radio_var,
+        text="/prepress"
+    )
+    radio5.pack()
+    radio5.place(x=20, y=148)
+
+    def btn_click():
+        root_s.quit()
+        root_s.destroy()
+
+    label = Label(root_s, text="圧縮の設定を選んでください。")
+    label.pack()
+    label.place(x=20, y=10)
+
+    button = Button(
+        root_s,
+        text="OK",
+        command=btn_click
+    )
+    button.place(x=20, y=180)
+
+    root_s.mainloop()
+
+    print(radio_var.get())
+
     for file_name in files_read:
         pdf_file_name = file_name.replace(".pdf", "_compressed.pdf")
-
         subprocess.check_output(
             [
                 "gswin64c",
                 "-sDEVICE=pdfwrite",
-                "-dPDFSETTINGS=/default",
+                "-dPDFSETTINGS=%s" % (radio_var.get()),
                 "-dBATCH",
                 "-dNOPAUSE",
                 "-dSAFER",

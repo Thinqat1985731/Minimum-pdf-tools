@@ -48,6 +48,9 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 * isortでモジュール整理
 * pdf-merger後に圧縮/結合元ファイルのゴミ箱送りのオプションを追加
 
+2023/11/10
+* GhostScriptの圧縮の設定をいじるウィンドウを追加
+
 ## Author
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="10%"><br>

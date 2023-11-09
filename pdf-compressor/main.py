@@ -1,4 +1,7 @@
+# Standard Library
 import sys
+
+# Third Party Library
 from compressor_func import checking, compressing, files_reading
 
 files_read = files_reading()
