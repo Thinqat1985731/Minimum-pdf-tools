@@ -2,7 +2,15 @@
 import os
 import subprocess
 import sys
-from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog, messagebox
+from tkinter import (
+    Button,
+    Label,
+    Radiobutton,
+    StringVar,
+    Tk,
+    filedialog,
+    messagebox,
+)
 
 # Third Party Library
 from pypdf import PdfWriter
@@ -19,7 +27,9 @@ def files_reading():
     ファイルの読み込み
     読み込まれたファイルのリストを返す
     """
-    files_read = filedialog.askopenfilenames(title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir)
+    files_read = filedialog.askopenfilenames(
+        title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+    )
 
     return files_read
 
@@ -37,7 +47,11 @@ def checking(files_read):
     if files_read != "":  # ファイルが存在する場合
         reverse = messagebox.askquestion(
             "Pdf-merger",
-            "現在の状態では以下の" + str(len(files_read)) + "個のファイルが以下の順番で結合されます：\n" + files_found + "\n逆順に並べ替えますか?",
+            "現在の状態では以下の"
+            + str(len(files_read))
+            + "個のファイルが以下の順番で結合されます：\n"
+            + files_found
+            + "\n逆順に並べ替えますか?",
         )
 
         if reverse == "yes":
@@ -50,7 +64,12 @@ def checking(files_read):
             files_found = files_found + file_name + "\n"
 
         ok = messagebox.askokcancel(
-            "Pdf-merger", "以下の" + str(len(files_read)) + "個のファイルを以下の順番で結合します：\n" + files_found + "\nよろしければ、OKを押してください。"
+            "Pdf-merger",
+            "以下の"
+            + str(len(files_read))
+            + "個のファイルを以下の順番で結合します：\n"
+            + files_found
+            + "\nよろしければ、OKを押してください。",
         )
 
         if ok:
@@ -76,7 +95,9 @@ def merging(files_read):
         pdf_file_merger.append(pdf)
 
     file_name_save = filedialog.asksaveasfilename(
-        title="結合したファイルを名前を付けて保存", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+        title="結合したファイルを名前を付けて保存",
+        filetypes=[("PDF file", "*.pdf")],
+        initialdir=iDir,
     )
 
     if file_name_save.rfind(".pdf") == -1:
@@ -117,23 +138,33 @@ def option(files_read, file_name_save):
 
         radio_var = StringVar(root_s)
 
-        radio1 = Radiobutton(root_s, value="/default", variable=radio_var, text="/default")
+        radio1 = Radiobutton(
+            root_s, value="/default", variable=radio_var, text="/default"
+        )
         radio1.pack()
         radio1.place(x=20, y=60)
 
-        radio2 = Radiobutton(root_s, value="/screen", variable=radio_var, text="/screen")
+        radio2 = Radiobutton(
+            root_s, value="/screen", variable=radio_var, text="/screen"
+        )
         radio2.pack()
         radio2.place(x=20, y=82)
 
-        radio3 = Radiobutton(root_s, value="/ebook", variable=radio_var, text="/ebook")
+        radio3 = Radiobutton(
+            root_s, value="/ebook", variable=radio_var, text="/ebook"
+        )
         radio3.pack()
         radio3.place(x=20, y=104)
 
-        radio4 = Radiobutton(root_s, value="/printer", variable=radio_var, text="/printer")
+        radio4 = Radiobutton(
+            root_s, value="/printer", variable=radio_var, text="/printer"
+        )
         radio4.pack()
         radio4.place(x=20, y=126)
 
-        radio5 = Radiobutton(root_s, value="/prepress", variable=radio_var, text="/prepress")
+        radio5 = Radiobutton(
+            root_s, value="/prepress", variable=radio_var, text="/prepress"
+        )
         radio5.pack()
         radio5.place(x=20, y=148)
 
