@@ -19,9 +19,7 @@ def files_reading():
     ファイルの読み込み
     読み込まれたファイルのリストを返す
     """
-    files_read = filedialog.askopenfilenames(title="開く", 
-    filetypes=[("PDF file", "*.pdf")], 
-    initialdir=iDir)
+    files_read = filedialog.askopenfilenames(title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir)
 
     return files_read
 
@@ -78,9 +76,7 @@ def merging(files_read):
         pdf_file_merger.append(pdf)
 
     file_name_save = filedialog.asksaveasfilename(
-        title="結合したファイルを名前を付けて保存", 
-        filetypes=[("PDF file", "*.pdf")], 
-        initialdir=iDir
+        title="結合したファイルを名前を付けて保存", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
     )
 
     if file_name_save.rfind(".pdf") == -1:
@@ -104,9 +100,10 @@ def option(files_read, file_name_save):
 
     if delete == "yes":
         for file_name in files_read:
-            file_name_delete = file_name.replace("/", "\\")  
-            # get_short_path_name() に対応
-            send2trash(file_name_delete)
+            if file_name != file_name_save:  # 上書きの場合は本体を削除しない
+                file_name_delete = file_name.replace("/", "\\")
+                # send2trashで使われるget_short_path_name関数の仕様に合わせる
+                send2trash(file_name_delete)
 
     compress = messagebox.askquestion(
         "Pdf-merger",
@@ -115,55 +112,32 @@ def option(files_read, file_name_save):
 
     if compress == "yes":
         root_s = Tk()
-        root_s.geometry('250x240')
+        root_s.geometry("250x240")
         root_s.title("pdf-merger")
 
         radio_var = StringVar(root_s)
 
-        radio1 = Radiobutton(
-            root_s,
-            value="/default",
-            variable=radio_var,
-            text="/default"
-        )
+        radio1 = Radiobutton(root_s, value="/default", variable=radio_var, text="/default")
         radio1.pack()
         radio1.place(x=20, y=60)
 
-        radio2 = Radiobutton(
-            root_s,
-            value="/screen",
-            variable=radio_var,
-            text="/screen"
-        )
+        radio2 = Radiobutton(root_s, value="/screen", variable=radio_var, text="/screen")
         radio2.pack()
         radio2.place(x=20, y=82)
 
-        radio3 = Radiobutton(
-            root_s,
-            value="/ebook",
-            variable=radio_var,
-            text="/ebook"
-        )
+        radio3 = Radiobutton(root_s, value="/ebook", variable=radio_var, text="/ebook")
         radio3.pack()
         radio3.place(x=20, y=104)
 
-        radio4 = Radiobutton(
-            root_s,
-            value="/printer",
-            variable=radio_var,
-            text="/printer"
-        )
+        radio4 = Radiobutton(root_s, value="/printer", variable=radio_var, text="/printer")
         radio4.pack()
         radio4.place(x=20, y=126)
 
-        radio5 = Radiobutton(
-            root_s,
-            value="/prepress",
-            variable=radio_var,
-            text="/prepress"
-        )
+        radio5 = Radiobutton(root_s, value="/prepress", variable=radio_var, text="/prepress")
         radio5.pack()
         radio5.place(x=20, y=148)
+
+        radio_var.set("/default")
 
         def btn_click():
             root_s.quit()
@@ -173,23 +147,17 @@ def option(files_read, file_name_save):
         label.pack()
         label.place(x=20, y=10)
 
-        button = Button(
-            root_s,
-            text="OK",
-            command=btn_click
-        )
+        button = Button(root_s, text="OK", command=btn_click)
         button.place(x=20, y=180)
 
         root_s.mainloop()
-
-        print(radio_var.get())
 
         file_name_temp = file_name_save.replace(".pdf", "_.pdf")
         subprocess.check_output(
             [
                 "gswin64c",
                 "-sDEVICE=pdfwrite",
-                "-dPDFSETTINGS=/default",
+                "-dPDFSETTINGS=%s" % (radio_var.get()),
                 "-dBATCH",
                 "-dNOPAUSE",
                 "-dSAFER",
@@ -198,7 +166,7 @@ def option(files_read, file_name_save):
             ]
         )
         os.remove(file_name_save)
-        file_name_temp.replace("_.pdf", ".pdf")
+        os.rename(file_name_temp, file_name_save)
 
     messagebox.showinfo("Pdf-compressor", "処理が完了しました。")
     root.destroy()

@@ -35,7 +35,7 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 
 2023/10/22
 * gitignoreを追加
-* ghostscriptにUIを付けるためのpdf-compressor追加
+* GhostScriptにUIを付けるためのpdf-compressor追加
 
 2023/10/23
 * linter/formatterでコードを整理
@@ -50,6 +50,11 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 
 2023/11/10
 * GhostScriptの圧縮の設定をいじるウィンドウを追加
+
+2023/11/11
+* 上書きする際のSend2trash回避処理の追加
+* 不要コードの削除
+* 変数名・コードの統一
 
 ## Author
 <div align="center">
