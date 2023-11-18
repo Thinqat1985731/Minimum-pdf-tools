@@ -1,5 +1,4 @@
-# UIadder-for-PDFtools
-
+# Minimum-pdf-tools
 ## Overview
 pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツール（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
 
@@ -55,6 +54,9 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 * 上書きする際のSend2trash回避処理の追加
 * 不要コードの削除
 * 変数名・コードの統一
+
+2023/11/18
+* 3ツールを1つのmain.pyに統一し選択式へ
 
 ## Author
 <div align="center">

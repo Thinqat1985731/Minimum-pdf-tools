@@ -132,7 +132,7 @@ venv.bak/
 .python-version
 pyproject.toml
 requirements.lock
-requirements_dev.lock
+requirements-dev.lock
 
 # Spyder project settings
 .spyderproject
