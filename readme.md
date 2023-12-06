@@ -1,6 +1,11 @@
-# Minimum-pdf-tools
-## Overview
+<div align="center">
+<img src="./icon.png" width="120" height="96"><br>
+<strong><font size="5"> Minimum-pdf-tools</font></strong>
+</div>
+
+# 
 pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツール（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
+
 
 ## Requirement
   - pypdf
@@ -57,6 +62,9 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 
 2023/11/18
 * 3ツールを1つのmain.pyに統一し選択式へ
+
+2023/12/11
+* ロゴを追加
 
 ## Author
 <div align="center">
