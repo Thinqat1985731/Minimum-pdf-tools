@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./icon.png" width="120" height="96"><br>
+<img src="./icon.png" width="180" height="144"><br>
 <strong><font size="5"> Minimum-pdf-tools</font></strong>
 </div>
 
@@ -68,10 +68,11 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 
 2023/12/13
 * main.pyの誤植によるバグ修正
+* readme.md更新
 
 ## Author
 <div align="center">
-<img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="10%"><br>
+<img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="100" height="100"><br>
 <strong>Thinqat(Thinqat1985731)</strong>
 </div>
 
