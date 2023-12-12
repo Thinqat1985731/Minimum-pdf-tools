@@ -64,17 +64,6 @@ def checking(files_read, program):
                 + "\nよろしければ、OKを押してください。",
             )
 
-            if ok:
-                return files_read
-
-            else:
-                messagebox.showinfo(
-                    program,
-                    "キャンセルされました。\n最初からやり直してください。",
-                )
-                root.destroy()
-                sys.exit()
-
         elif program == "pdf-separator":
             ok = messagebox.askokcancel(
                 "Pdf-separator",
@@ -84,17 +73,6 @@ def checking(files_read, program):
                 + files_found
                 + "\nよろしければ、OKを押してください。",
             )
-
-            if ok:
-                return files_read
-
-            else:
-                messagebox.showinfo(
-                    program,
-                    "キャンセルされました。\n最初からやり直してください。",
-                )
-                root.destroy()
-                sys.exit()
 
         elif program == "pdf-compressor":
             ok = messagebox.askokcancel(
@@ -106,16 +84,16 @@ def checking(files_read, program):
                 + "\nよろしければ、OKを押してください。",
             )
 
-            if ok:
-                return files_read
+        if ok:
+            return files_read
 
-            else:
-                messagebox.showinfo(
-                    program,
-                    "キャンセルされました。\n最初からやり直してください。",
-                )
-                root.destroy()
-                sys.exit()
+        else:
+            messagebox.showinfo(
+                program,
+                "キャンセルされました。\n最初からやり直してください。",
+            )
+            root.destroy()
+            sys.exit()
 
     else:
         messagebox.showerror(

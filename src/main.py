@@ -50,7 +50,7 @@ button.place(x=20, y=180)
 root.mainloop()
 
 files_read = files_reading()
-filse_read = checking(files_read=files_read, program=radio_var.get())
+files_read = checking(files_read=files_read, program=radio_var.get())
 
 if radio_var.get() == "pdf-merger":
     file_name_save = merging(files_read=files_read)

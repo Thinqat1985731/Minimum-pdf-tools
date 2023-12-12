@@ -66,6 +66,9 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 2023/12/11
 * ロゴを追加
 
+2023/12/13
+* main.pyの誤植によるバグ修正
+
 ## Author
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="10%"><br>
