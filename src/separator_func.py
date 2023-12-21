@@ -1,5 +1,6 @@
 # Standard Library
 import os
+import sys
 from tkinter import Tk, messagebox
 
 # Third Party Library
@@ -7,6 +8,46 @@ from pypdf import PdfReader, PdfWriter
 
 root = Tk()
 root.withdraw()
+
+
+def separator_check(files_read):
+    """
+    読み込んだファイルのリストの結合前処理（存在の確認や並べ替えなど）
+    処理後のリストを返す
+    * 状況によりcheck段階で処理を終わらせる
+    """
+    files_found = ""
+    for file_name in files_read:
+        files_found = files_found + file_name + "\n"
+
+    if files_read != "":  # ファイルが存在する場合
+        ok = messagebox.askokcancel(
+            "pdf-separator",
+            "以下の"
+            + str(len(files_read))
+            + "個のファイルを個々のページに分割します：\n"
+            + files_found
+            + "\nよろしければ、OKを押してください。",
+        )
+
+        if ok:
+            return files_read
+
+        else:
+            messagebox.showinfo(
+                "pdf-separator",
+                "キャンセルされました。\n最初からやり直してください。",
+            )
+            root.destroy()
+            sys.exit()
+
+    else:
+        messagebox.showerror(
+            "pdf-separator",
+            "データが選択されていません。\n最初からやり直してください。",
+        )
+        root.destroy()
+        sys.exit()
 
 
 def separating(files_read):
@@ -33,6 +74,6 @@ def separating(files_read):
 
     pdf_file_writer.close()  # writerを閉じる
 
-    messagebox.showinfo("Pdf-separator", "処理が完了しました。")
+    messagebox.showinfo("pdf-separator", "処理が完了しました。")
     root.destroy()
     return

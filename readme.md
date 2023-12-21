@@ -3,7 +3,6 @@
 <strong><font size="5"> Minimum-pdf-tools</font></strong>
 </div>
 
-# 
 pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツール（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
 
 
@@ -68,6 +67,10 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 
 2023/12/13
 * main.pyの誤植によるバグ修正
+* readme.md更新
+
+2023/12/20
+* 並べ替えの順番を任意に決定可能に
 * readme.md更新
 
 ## Author

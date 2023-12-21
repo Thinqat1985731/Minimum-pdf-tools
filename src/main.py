@@ -1,14 +1,16 @@
 # Standard Library
+import os
 import sys
-from tkinter import Button, Label, Radiobutton, StringVar, Tk
+from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog
 
 # First Party Library
-from common_func import checking, files_reading
-from compressor_func import compressing
-from merger_func import merging, option
-from separator_func import separating
+from compressor_func import compressing, compressor_check
+from merger_func import merger_check, merging, option
+from separator_func import separating, separator_check
 
 root = Tk()
+dirname = os.path.dirname(__file__)
+iDir = os.path.abspath(dirname)
 root.geometry("250x240")
 root.title("minimum-pdf-tools")
 
@@ -49,14 +51,18 @@ button.place(x=20, y=180)
 
 root.mainloop()
 
-files_read = files_reading()
-files_read = checking(files_read=files_read, program=radio_var.get())
+files_read = filedialog.askopenfilenames(
+    title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+)
 
 if radio_var.get() == "pdf-merger":
+    files_read = merger_check(files_read=files_read)
     file_name_save = merging(files_read=files_read)
     option(files_read=files_read, file_name_save=file_name_save)
 elif radio_var.get() == "pdf-separator":
+    files_read = separator_check(files_read=files_read)
     separating(files_read=files_read)
 elif radio_var.get() == "pdf-compressor":
+    files_read = compressor_check(files_read=files_read)
     compressing(files_read=files_read)
 sys.exit()
