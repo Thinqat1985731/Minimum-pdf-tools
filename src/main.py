@@ -5,7 +5,7 @@ from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog
 
 # First Party Library
 from compressor_func import compressing, compressor_check
-from merger_func import merger_check, merging, option
+from merger_func import merger_check, merging
 from separator_func import separating, separator_check
 
 root = Tk()
@@ -57,8 +57,7 @@ files_read = filedialog.askopenfilenames(
 
 if radio_var.get() == "pdf-merger":
     files_read = merger_check(files_read=files_read)
-    file_name_save = merging(files_read=files_read)
-    option(files_read=files_read, file_name_save=file_name_save)
+    merging(files_read=files_read)
 elif radio_var.get() == "pdf-separator":
     files_read = separator_check(files_read=files_read)
     separating(files_read=files_read)
