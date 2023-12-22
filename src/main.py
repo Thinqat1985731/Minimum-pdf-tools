@@ -1,7 +1,14 @@
 # Standard Library
 import os
 import sys
-from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog
+from tkinter import (
+    Button,
+    Label,
+    Radiobutton,
+    StringVar,
+    Tk,
+    filedialog,
+)
 
 # First Party Library
 from compressor_func import compressing, compressor_check
@@ -42,13 +49,19 @@ def btn_click():
     root.destroy()
 
 
+def click_close():
+    root.destroy()
+    sys.exit()
+
+
 label = Label(root, text="ツールを選択してください")
 label.pack()
 label.place(x=20, y=10)
 
 button = Button(root, text="OK", command=btn_click)
-button.place(x=20, y=180)
+button.place(x=125, y=180, width=100)
 
+root.protocol("WM_DELETE_WINDOW", click_close)
 root.mainloop()
 
 files_read = filedialog.askopenfilenames(

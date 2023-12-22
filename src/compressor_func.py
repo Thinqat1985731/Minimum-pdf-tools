@@ -101,13 +101,23 @@ def compressing(files_read):
         root_s.quit()
         root_s.destroy()
 
+    def click_close():
+        messagebox.showinfo(
+            "pdf-merger",
+            "キャンセルされました。\n最初からやり直してください。",
+        )
+        root_s.destroy()
+        root.destroy()
+        sys.exit()
+
     label = Label(root_s, text="圧縮の設定を選んでください。")
     label.pack()
     label.place(x=20, y=10)
 
     button = Button(root_s, text="OK", command=btn_click)
-    button.place(x=20, y=180)
+    button.place(x=125, y=180, width=100)
 
+    root_s.protocol("WM_DELETE_WINDOW", click_close)
     root_s.mainloop()
 
     replace = messagebox.askquestion(

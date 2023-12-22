@@ -171,13 +171,18 @@ def merging(files_read):
                 root_s.quit()
                 root_s.destroy()
 
+            def click_close():
+                root_s.quit()
+                root_s.destroy()
+
             label = Label(root_s, text="圧縮の設定を選んでください。")
             label.pack()
             label.place(x=20, y=10)
 
             button = Button(root_s, text="OK", command=btn_click)
-            button.place(x=20, y=180)
+            button.place(x=125, y=180, width=100)
 
+            root_s.protocol("WM_DELETE_WINDOW", click_close)
             root_s.mainloop()
 
             file_name_temp = file_name_save.replace(".pdf", "_.pdf")
@@ -200,6 +205,7 @@ def merging(files_read):
 
         root_o.quit()
         root_o.destroy()
+        sys.exit()
 
     def click_close():
         messagebox.showinfo(
@@ -235,18 +241,14 @@ def merging(files_read):
     label.place(x=20, y=10)
 
     # ボタンを定義して配置
-    button = Button(root_o, text="OK", command=btn_click_ok)
+    button_ok = Button(root_o, text="結合", command=btn_click_ok)
     button_up = Button(root_o, text="▲", command=up_list)
     button_down = Button(root_o, text="▼", command=down_list)
 
-    button.place(x=240, y=300, width=60)
+    button_ok.place(x=475, y=300, width=100)
     button_up.place(x=550, y=100, width=40)
     button_down.place(x=550, y=150, width=40)
 
     root_o.protocol("WM_DELETE_WINDOW", click_close)
-
-    files_read_ordered = []
-    for i in range(listbox.size()):
-        files_read_ordered.append(listbox.get(i))
-
     root_o.mainloop()
+    return

@@ -1,7 +1,8 @@
+
 <div align="center">
-<img src="./icon.png" width="180" height="144"><br>
-<strong><font size="5"> Minimum-pdf-tools</font></strong>
+<img src="./icon_.png" width="665" height="100"><br>
 </div>
+<br>
 
 pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツール（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
 
@@ -15,11 +16,15 @@ pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとし
 
 ## Usage
 
-Requirementにあるパッケージを入れたPython環境（仮想でも生でもよい）とGhostscriptをまずは用意し、そのうえで個々のディレクトリに入っているmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。<br>
-mergerは保存名聞いてきますが、既にあるやつに上書きしようとするとバグります。
+Requirementにあるパッケージを入れたPython環境（仮想でも生でもよい）とGhostscriptをまずは用意し、そのうえでsrcに入っているmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。<br>
+mergerは保存名聞いてきますが、上書き時の動作は保障できません。
 
 ## Features
-データが無いときに警告したり、pdf-mergerで保存時に.pdf付け忘れた場合に勝手に付け足すくらいしかないです。
+* 単一のmain.pyからツールの分岐を行う。
+* 順番を指定してPDFを結合することができる。
+* 結合後の元PDFの削除およびGhostscriptによる結合結果PDFの圧縮に対応。
+* PDFを1ページ毎に分離することができる。
+* GhostscriptによるPDFの圧縮にUIを付与。
 
 ## History
 2023/4/2
@@ -69,10 +74,15 @@ mergerは保存名聞いてきますが、既にあるやつに上書きしよ�
 * main.pyの誤植によるバグ修正
 * readme.md更新
 
-2023/12/20
+2023/12/21
 * 結合について、並べ替えの順番を任意に決定可能に
 * 結合後のオプションをmerging関数に統合
 * readme.md更新
+
+2023/12/22
+* ×ボタンが押されたときのバグ防止
+* ボタンサイズや位置の改良
+* Python自体の終了処理をより追加
 
 ## Author
 <div align="center">
