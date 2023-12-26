@@ -96,20 +96,36 @@ def merging(files_read):
         if len(indices) == 1:  # 選択した項目が１つか？
             listbox.insert(indices[0] + 1, "（空白のページ）")
 
+    def delete_page():  # 選択したファイルの1つ後に空白のページを追加
+        indices = listbox.curselection()
+        if len(indices) == 1:  # 選択した項目が１つか？
+            if listbox.get(indices) == "（空白のページ）":
+                listbox.delete(indices[0])
+
     def btn_click_ok():
         pdf_file_merger = PdfWriter()
+        insert_pages = 0
 
+        # 出だしから空白のページが連続しているとき、他の結合後に改めて
+        # insertするので、予め枚数を計算しておく
         for i in range(listbox.size()):
-            # "（空白のページ）"を見つけたら、その場で追加
-            # ただし出だしが"（空白のページ）"の場合は後からinsert
+            if listbox.get(0) == "（空白のページ）":
+                if listbox.get(i) != "（空白のページ）":
+                    break
+                insert_pages = insert_pages + 1
+
+        # 結合本体。先頭から連続していない空白のページを見つけたら、
+        # すぐに追加し、他のPDFは順当にappend。
+        for i in range(listbox.size()):
             if listbox.get(i) == "（空白のページ）":
-                if i != 0:
+                if i > insert_pages:
                     pdf_file_merger.add_blank_page()
             else:
                 pdf_file_merger.append(listbox.get(i))
 
-        if listbox.get(0) == "（空白のページ）":
-            pdf_file_merger.insert_blank_page()
+        # 出だしから連続している空白のページを最後にまとめて追加。
+        for i in range(insert_pages):
+            pdf_file_merger.insert_blank_page(index=i - i)
 
         file_name_save = filedialog.asksaveasfilename(
             title="結合したファイルを名前を付けて保存",
@@ -259,11 +275,15 @@ def merging(files_read):
     button_add_page = Button(
         root_o, text="空白のﾍﾟｰｼﾞを追加", command=add_page
     )
+    button_delete_page = Button(
+        root_o, text="空白のﾍﾟｰｼﾞを削除", command=delete_page
+    )
     button_ok = Button(root_o, text="結合", command=btn_click_ok)
     button_up = Button(root_o, text="▲", command=up_list)
     button_down = Button(root_o, text="▼", command=down_list)
 
-    button_add_page.place(x=305, y=300, width=150)
+    button_add_page.place(x=135, y=300, width=150)
+    button_delete_page.place(x=305, y=300, width=150)
     button_ok.place(x=475, y=300, width=100)
     button_up.place(x=550, y=100, width=40)
     button_down.place(x=550, y=150, width=40)
