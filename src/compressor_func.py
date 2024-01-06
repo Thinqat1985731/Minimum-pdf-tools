@@ -2,41 +2,28 @@
 import os
 import subprocess
 import sys
-from tkinter import (
-    Button,
-    Label,
-    Radiobutton,
-    StringVar,
-    Tk,
-    messagebox,
-)
+from tkinter import Button, Label, Radiobutton, StringVar, Tk, messagebox
 
 root = Tk()
 root.withdraw()
 
 
-def compressor_check(files_read):
+def compressor_check(file_read):
     """
     読み込んだファイルのリストの結合前処理（存在の確認や並べ替えなど）
     処理後のリストを返す
     * 状況によりcheck段階で処理を終わらせる
     """
-    files_found = ""
-    for file_name in files_read:
-        files_found = files_found + file_name + "\n"
-
-    if files_read != "":  # ファイルが存在する場合
+    if file_read != "":  # ファイルが存在する場合
         ok = messagebox.askokcancel(
             "pdf-compressor",
-            "以下の"
-            + str(len(files_read))
-            + "個のファイルを個々のページに分割します：\n"
-            + files_found
+            "以下のファイルを圧縮します：\n"
+            + file_read
             + "\nよろしければ、OKを押してください。",
         )
 
         if ok:
-            return files_read
+            return file_read
 
         else:
             messagebox.showinfo(
@@ -55,7 +42,7 @@ def compressor_check(files_read):
         sys.exit()
 
 
-def compressing(files_read):
+def compressing(file_read):
     """
     ghostscriptを拝借した圧縮の本体。設定ウィンドウもあるよ。
     """
@@ -125,18 +112,18 @@ def compressing(files_read):
         "圧縮前のファイルを削除しますか？",
     )
 
-    for file_name in files_read:
+    for file_name in file_read:
         if replace == "yes":
             file_name_temp = file_name.replace(".pdf", "_.pdf")
             subprocess.check_output(
                 [
                     "gswin64c",
                     "-sDEVICE=pdfwrite",
-                    "-dPDFSETTINGS=%s" % (radio_var.get()),
+                    f"-dPDFSETTINGS={radio_var.get()}",
                     "-dBATCH",
                     "-dNOPAUSE",
                     "-dSAFER",
-                    "-sOUTPUTFILE=%s" % (file_name_temp,),
+                    f"-sOUTPUTFILE={file_name_temp,}",
                     file_name,
                 ]
             )
@@ -148,11 +135,11 @@ def compressing(files_read):
                 [
                     "gswin64c",
                     "-sDEVICE=pdfwrite",
-                    "-dPDFSETTINGS=%s" % (radio_var.get()),
+                    f"-dPDFSETTINGS={radio_var.get()}",
                     "-dBATCH",
                     "-dNOPAUSE",
                     "-dSAFER",
-                    "-sOUTPUTFILE=%s" % (file_name_save,),
+                    f"-sOUTPUTFILE={file_name_save,}",
                     file_name,
                 ]
             )

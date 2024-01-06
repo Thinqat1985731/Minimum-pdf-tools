@@ -1,14 +1,7 @@
 # Standard Library
 import os
 import sys
-from tkinter import (
-    Button,
-    Label,
-    Radiobutton,
-    StringVar,
-    Tk,
-    filedialog,
-)
+from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog
 
 # First Party Library
 from compressor_func import compressing, compressor_check
@@ -64,17 +57,26 @@ button.place(x=125, y=180, width=100)
 root.protocol("WM_DELETE_WINDOW", click_close)
 root.mainloop()
 
-files_read = filedialog.askopenfilenames(
-    title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
-)
-
 if radio_var.get() == "pdf-merger":
+    # 複数PDFファイルを開く
+    files_read = filedialog.askopenfilenames(
+        title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+    )
     files_read = merger_check(files_read=files_read)
     merging(files_read=files_read)
 elif radio_var.get() == "pdf-separator":
-    files_read = separator_check(files_read=files_read)
-    separating(files_read=files_read)
+    # 単一PDFファイルを開く
+    file_read = filedialog.askopenfilename(
+        title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+    )
+    file_read = separator_check(file_read=file_read)
+    separating(file_read=file_read)
 elif radio_var.get() == "pdf-compressor":
-    files_read = compressor_check(files_read=files_read)
-    compressing(files_read=files_read)
+    # 単一PDFファイルを開く
+    file_read = filedialog.askopenfilename(
+        title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+    )
+    file_read = compressor_check(file_read=file_read)
+    compressing(file_read=file_read)
+
 sys.exit()

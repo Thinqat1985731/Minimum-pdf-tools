@@ -104,7 +104,7 @@ def merging(files_read):
 
     def btn_click_ok():
         pdf_file_merger = PdfWriter()
-        insert_pages = 0
+        insert_page_n = 0
 
         # 出だしから空白のページが連続しているとき、他の結合後に改めて
         # insertするので、予め枚数を計算しておく
@@ -112,19 +112,19 @@ def merging(files_read):
             if listbox.get(0) == "（空白のページ）":
                 if listbox.get(i) != "（空白のページ）":
                     break
-                insert_pages = insert_pages + 1
+                insert_page_n = insert_page_n + 1
 
         # 結合本体。先頭から連続していない空白のページを見つけたら、
         # すぐに追加し、他のPDFは順当にappend。
         for i in range(listbox.size()):
             if listbox.get(i) == "（空白のページ）":
-                if i > insert_pages:
+                if i > insert_page_n:
                     pdf_file_merger.add_blank_page()
             else:
                 pdf_file_merger.append(listbox.get(i))
 
         # 出だしから連続している空白のページを最後にまとめて追加。
-        for i in range(insert_pages):
+        for i in range(insert_page_n):
             pdf_file_merger.insert_blank_page(index=i - i)
 
         file_name_save = filedialog.asksaveasfilename(
@@ -137,7 +137,8 @@ def merging(files_read):
             file_name_save = file_name_save + ".pdf"
             # 右から検索して.pdfが無かったら勝手に付け足す
 
-        pdf_file_merger.write(file_name_save)
+        with open(file_name_save, "wb") as file:
+            pdf_file_merger.write(file)
         pdf_file_merger.close()  # writer を閉じる
 
         # 結合後のオプション機能
@@ -221,11 +222,11 @@ def merging(files_read):
                 [
                     "gswin64c",
                     "-sDEVICE=pdfwrite",
-                    "-dPDFSETTINGS=%s" % (radio_var.get()),
+                    f"-dPDFSETTINGS={radio_var.get()}",
                     "-dBATCH",
                     "-dNOPAUSE",
                     "-dSAFER",
-                    "-sOUTPUTFILE=%s" % (file_name_temp,),
+                    f"-sOUTPUTFILE={file_name_temp,}",
                     file_name_save,
                 ]
             )

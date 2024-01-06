@@ -94,6 +94,12 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 * 空白のページの削除に対応。
 * 空白のページが先頭に並んでいた場合の特殊処理を追加。
 
+2024/01/06 (**v5.00**)
+* **特定の枚数でまとめた分割の対応/圧縮と分割に関して単一のファイルを読み込むように修正**
+* pdf-compressorのダイアログが複数間違っていたため修正
+* 圧縮関係における名前の埋め込みをf-strings（フォーマット文字列リテラル）へ変更
+* mergerのほうでもwith構文が使われるようにコードを統一
+
 ## Author
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="100" height="100"><br>
