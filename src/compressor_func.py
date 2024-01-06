@@ -90,7 +90,7 @@ def compressing(file_read):
 
     def click_close():
         messagebox.showinfo(
-            "pdf-merger",
+            "pdf-compressor",
             "キャンセルされました。\n最初からやり直してください。",
         )
         root_s.destroy()
