@@ -27,7 +27,7 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 * 単一のmain.pyからツールの分岐を行う。
 * 順番を指定してPDFを結合することができる。
 * 結合後の元PDFの削除およびGhostscriptによる結合結果PDFの圧縮に対応。
-* PDFを1ページ毎に分離することができる。
+* PDFを1ページ毎または指定した境界で分離することができる。
 * GhostscriptによるPDFの圧縮にUIを付与。
 
 ## History
