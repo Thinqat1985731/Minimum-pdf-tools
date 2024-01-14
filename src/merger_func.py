@@ -72,7 +72,9 @@ def merging(files_read):
     結合の本体
     """
     root_o = Tk()
+
     root_o.geometry("600x350")
+    root_o.resizable(False, False)
     root_o.title("pdf-merger")
 
     def up_list():  # 選択したファイルを1つ前に
@@ -162,7 +164,9 @@ def merging(files_read):
 
         if compress == "yes":
             root_s = Tk()
+
             root_s.geometry("250x240")
+            root_s.resizable(False, False)
             root_s.title("pdf-merger")
 
             radio_var = StringVar(root_s)
@@ -222,11 +226,11 @@ def merging(files_read):
                 [
                     "gswin64c",
                     "-sDEVICE=pdfwrite",
-                    f"-dPDFSETTINGS={radio_var.get()}",
+                    "-dPDFSETTINGS=%s" % (radio_var.get()),
                     "-dBATCH",
                     "-dNOPAUSE",
                     "-dSAFER",
-                    f"-sOUTPUTFILE={file_name_temp,}",
+                    "-sOUTPUTFILE=%s" % (file_name_temp,),
                     file_name_save,
                 ]
             )

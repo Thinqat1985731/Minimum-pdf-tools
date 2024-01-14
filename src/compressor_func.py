@@ -17,9 +17,7 @@ def compressor_check(file_read):
     if file_read != "":  # ファイルが存在する場合
         ok = messagebox.askokcancel(
             "pdf-compressor",
-            "以下のファイルを圧縮します：\n"
-            + file_read
-            + "\nよろしければ、OKを押してください。",
+            "以下のファイルを圧縮します：\n" + file_read + "\nよろしければ、OKを押してください。",
         )
 
         if ok:
@@ -47,8 +45,11 @@ def compressing(file_read):
     ghostscriptを拝借した圧縮の本体。設定ウィンドウもあるよ。
     """
     root_s = Tk()
+
     root_s.geometry("250x240")
+    root_s.resizable(False, False)
     root_s.title("pdf-compressor")
+    root_s.iconbitmap(default="favicon.ico")
 
     radio_var = StringVar(root_s)
 
@@ -112,37 +113,37 @@ def compressing(file_read):
         "圧縮前のファイルを削除しますか？",
     )
 
-    for file_name in file_read:
-        if replace == "yes":
-            file_name_temp = file_name.replace(".pdf", "_.pdf")
-            subprocess.check_output(
-                [
-                    "gswin64c",
-                    "-sDEVICE=pdfwrite",
-                    f"-dPDFSETTINGS={radio_var.get()}",
-                    "-dBATCH",
-                    "-dNOPAUSE",
-                    "-dSAFER",
-                    f"-sOUTPUTFILE={file_name_temp,}",
-                    file_name,
-                ]
-            )
-            os.remove(file_name)
-            os.rename(file_name_temp, file_name)
-        else:
-            file_name_save = file_name.replace(".pdf", "_compressed.pdf")
-            subprocess.check_output(
-                [
-                    "gswin64c",
-                    "-sDEVICE=pdfwrite",
-                    f"-dPDFSETTINGS={radio_var.get()}",
-                    "-dBATCH",
-                    "-dNOPAUSE",
-                    "-dSAFER",
-                    f"-sOUTPUTFILE={file_name_save,}",
-                    file_name,
-                ]
-            )
+    file_name = file_read
+    if replace == "yes":
+        file_name_temp = file_name.replace(".pdf", "_.pdf")
+        subprocess.check_output(
+            [
+                "gswin64c",
+                "-sDEVICE=pdfwrite",
+                "-dPDFSETTINGS=%s" % (radio_var.get()),
+                "-dBATCH",
+                "-dNOPAUSE",
+                "-dSAFER",
+                "-sOUTPUTFILE=%s" % (file_name_temp,),
+                file_name,
+            ]
+        )
+        os.remove(file_name)
+        os.rename(file_name_temp, file_name)
+    else:
+        file_name_save = file_name.replace(".pdf", "_compressed.pdf")
+        subprocess.check_output(
+            [
+                "gswin64c",
+                "-sDEVICE=pdfwrite",
+                "-dPDFSETTINGS=%s" % (radio_var.get()),
+                "-dBATCH",
+                "-dNOPAUSE",
+                "-dSAFER",
+                "-sOUTPUTFILE=%s" % (file_name_save,),
+                file_name,
+            ]
+        )
 
     messagebox.showinfo("pdf-compressor", "処理が完了しました。")
     root.destroy()

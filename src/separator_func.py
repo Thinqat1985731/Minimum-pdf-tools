@@ -88,7 +88,9 @@ def separating(file_read):
 
     else:
         root_o = Tk()
+
         root_o.geometry("600x350")
+        root_o.resizable(False, False)
         root_o.title("pdf-separator")
 
         def up_list():  # 選択したファイルを1つ前に

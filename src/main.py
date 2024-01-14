@@ -11,7 +11,9 @@ from separator_func import separating, separator_check
 root = Tk()
 dirname = os.path.dirname(__file__)
 iDir = os.path.abspath(dirname)
+
 root.geometry("250x240")
+root.resizable(False, False)
 root.title("minimum-pdf-tools")
 
 radio_var = StringVar(root)

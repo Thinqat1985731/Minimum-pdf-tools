@@ -100,6 +100,11 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 * 圧縮関係における名前の埋め込みをf-strings（フォーマット文字列リテラル）へ変更
 * mergerのほうでもwith構文が使われるようにコードを統一
 
+2024/01/14 (v5.10)
+* f-stringsでエラーが発生したため、元に戻す
+* tkinterによるウィンドウのresizableを縦横ともにFalseに設定
+* icon.pngが正方形に近くなるように整形
+
 ## Author
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="100" height="100"><br>
