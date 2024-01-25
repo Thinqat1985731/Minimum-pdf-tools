@@ -105,6 +105,10 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 * tkinterによるウィンドウのresizableを縦横ともにFalseに設定
 * icon.pngが正方形に近くなるように整形
 
+2024/01/25 (v5.20)
+* pdf-compressorにfaviconのコードが残ってエラーになっていたので削除
+* pdf-mergerが終了しないバグを修正
+
 ## Author
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="100" height="100"><br>

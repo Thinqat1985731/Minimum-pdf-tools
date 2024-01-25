@@ -241,6 +241,8 @@ def merging(files_read):
 
         root_o.quit()
         root_o.destroy()
+        root.quit()
+        root.destroy()
         sys.exit()
 
     def click_close():

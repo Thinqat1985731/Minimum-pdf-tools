@@ -17,7 +17,9 @@ def compressor_check(file_read):
     if file_read != "":  # ファイルが存在する場合
         ok = messagebox.askokcancel(
             "pdf-compressor",
-            "以下のファイルを圧縮します：\n" + file_read + "\nよろしければ、OKを押してください。",
+            "以下のファイルを圧縮します：\n"
+            + file_read
+            + "\nよろしければ、OKを押してください。",
         )
 
         if ok:
@@ -49,7 +51,6 @@ def compressing(file_read):
     root_s.geometry("250x240")
     root_s.resizable(False, False)
     root_s.title("pdf-compressor")
-    root_s.iconbitmap(default="favicon.ico")
 
     radio_var = StringVar(root_s)
 
