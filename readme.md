@@ -1,6 +1,6 @@
 
 <div align="center">
-<img src="./icon_.png" width="665" alt="Logo"><br>
+<img src="./images/icon_.png" width="665" alt="Logo"><br>
 
 ![GitHub License](https://img.shields.io/github/license/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge)
 ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge)
@@ -133,6 +133,10 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 2024/02/11
 
 - readme.mdのコードを整理
+
+2024/02/13
+
+- 画像をフォルダに移動
 
 ## Author
 
