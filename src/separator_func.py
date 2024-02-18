@@ -212,5 +212,6 @@ def separating(file_read):
 
         messagebox.showinfo("pdf-separator", "処理が完了しました。")
         root.destroy()
+        sys.exit()
 
     return
