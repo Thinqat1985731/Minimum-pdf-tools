@@ -4,7 +4,6 @@ import sys
 from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog
 
 # First Party Library
-from compressor_func import compressing, compressor_check
 from merger_func import merger_check, merging
 from separator_func import separating, separator_check
 
@@ -39,12 +38,12 @@ radio3.place(x=20, y=126)
 radio_var.set("pdf-merger")
 
 
-def btn_click():
+def btn_click() -> None:
     root.quit()
     root.destroy()
 
 
-def click_close():
+def click_close() -> None:
     root.destroy()
     sys.exit()
 
@@ -66,19 +65,12 @@ if radio_var.get() == "pdf-merger":
     )
     files_read = merger_check(files_read=files_read)
     merging(files_read=files_read)
-elif radio_var.get() == "pdf-separator":
+    sys.exit()
+else:
     # 単一PDFファイルを開く
     file_read = filedialog.askopenfilename(
         title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
     )
     file_read = separator_check(file_read=file_read)
     separating(file_read=file_read)
-elif radio_var.get() == "pdf-compressor":
-    # 単一PDFファイルを開く
-    file_read = filedialog.askopenfilename(
-        title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
-    )
-    file_read = compressor_check(file_read=file_read)
-    compressing(file_read=file_read)
-
-sys.exit()
+    sys.exit()

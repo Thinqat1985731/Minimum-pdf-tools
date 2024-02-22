@@ -11,6 +11,7 @@ from tkinter import (
     Tk,
     messagebox,
 )
+from typing import Any
 
 # Third Party Library
 from pypdf import PdfReader, PdfWriter
@@ -19,11 +20,9 @@ root = Tk()
 root.withdraw()
 
 
-def separator_check(file_read):
+def separator_check(file_read: str) -> str:
     """
-    読み込んだファイルのリストの結合前処理（存在の確認や並べ替えなど）
-    処理後のリストを返す
-    * 状況によりcheck段階で処理を終わらせる
+    読み込んだファイルの結合前確認
     """
     if file_read != "":  # ファイルが存在する場合
         ok = messagebox.askokcancel(
@@ -53,7 +52,7 @@ def separator_check(file_read):
         sys.exit()
 
 
-def separating(file_read):
+def separating(file_read: str) -> None:
     """
     分離の本体
     """
@@ -93,7 +92,7 @@ def separating(file_read):
         root_o.resizable(False, False)
         root_o.title("pdf-separator")
 
-        def up_list():  # 選択したファイルを1つ前に
+        def up_list() -> None:  # 選択したファイルを1つ前に
             indices = listbox.curselection()
             if len(indices) == 1:  # 選択した項目が１つか？
                 if listbox.get(indices) == "-----------------":
@@ -102,7 +101,7 @@ def separating(file_read):
                         listbox.delete(indices[0] + 1)
                         listbox.select_set(indices[0] - 1)
 
-        def down_list():  # 選択したファイルを1つ後に
+        def down_list() -> None:  # 選択したファイルを1つ後に
             indices = listbox.curselection()
             if len(indices) == 1:  # 選択した項目が１つか？
                 if listbox.get(indices) == "-----------------":
@@ -111,22 +110,22 @@ def separating(file_read):
                         listbox.delete(indices)
                         listbox.select_set(indices[0] + 1)
 
-        def add_line():  # 選択したファイルの1つ後に空白のページを追加
+        def add_line() -> None:  # 選択したファイルの1つ後に空白ページを追加
             indices = listbox.curselection()
             if len(indices) == 1:  # 選択した項目が１つか？
                 listbox.insert(indices[0] + 1, "-----------------")
 
-        def delete_line():  # 選択したファイルの1つ後に空白のページを追加
+        def delete_line() -> None:  # 選択したファイルの1つ後に空白ページを追加
             indices = listbox.curselection()
             if len(indices) == 1:  # 選択した項目が１つか？
                 if listbox.get(indices) == "-----------------":
                     listbox.delete(indices[0])
 
-        def btn_click_ok():
+        def btn_click_ok() -> None:
             # 境界の場所を確認し、分割用の二重配列を作成する。
             file_num = 0
             page_n_temp = 0
-            pages_one_file = []
+            pages_one_file: list[Any] = []
             pages = []
 
             for num in range(listbox.size()):
@@ -156,7 +155,7 @@ def separating(file_read):
             root_o.destroy()
             sys.exit()
 
-        def click_close():
+        def click_close() -> None:
             messagebox.showinfo(
                 "pdf-separator",
                 "キャンセルされました。\n最初からやり直してください。",

@@ -26,7 +26,7 @@ root = Tk()
 root.withdraw()
 
 
-def merger_check(files_read):
+def merger_check(files_read: list[str]) -> list[str]:
     """
     読み込んだファイルのリストの結合前処理（存在の確認や並べ替えなど）
     処理後のリストを返す
@@ -67,7 +67,7 @@ def merger_check(files_read):
         sys.exit()
 
 
-def merging(files_read):
+def merging(files_read: list[str]) -> None:
     """
     結合の本体
     """
@@ -77,7 +77,7 @@ def merging(files_read):
     root_o.resizable(False, False)
     root_o.title("pdf-merger")
 
-    def up_list():  # 選択したファイルを1つ前に
+    def up_list() -> None:  # 選択したファイルを1つ前に
         indices = listbox.curselection()
         if len(indices) == 1:  # 選択した項目が１つか？
             if indices[0] > 0:
@@ -85,7 +85,7 @@ def merging(files_read):
                 listbox.delete(indices[0] + 1)
                 listbox.select_set(indices[0] - 1)
 
-    def down_list():  # 選択したファイルを1つ後に
+    def down_list() -> None:  # 選択したファイルを1つ後に
         indices = listbox.curselection()
         if len(indices) == 1:  # 選択した項目が１つか？
             if indices[0] < listbox.size() - 1:
@@ -93,18 +93,18 @@ def merging(files_read):
                 listbox.delete(indices)
                 listbox.select_set(indices[0] + 1)
 
-    def add_page():  # 選択したファイルの1つ後に空白のページを追加
+    def add_page() -> None:  # 選択したファイルの1つ後に空白のページを追加
         indices = listbox.curselection()
         if len(indices) == 1:  # 選択した項目が１つか？
             listbox.insert(indices[0] + 1, "（空白のページ）")
 
-    def delete_page():  # 選択したファイルの1つ後に空白のページを追加
+    def delete_page() -> None:  # 選択したファイルの1つ後に空白のページを追加
         indices = listbox.curselection()
         if len(indices) == 1:  # 選択した項目が１つか？
             if listbox.get(indices) == "（空白のページ）":
                 listbox.delete(indices[0])
 
-    def btn_click_ok():
+    def btn_click_ok() -> None:
         pdf_file_merger = PdfWriter()
         insert_page_n = 0
 
@@ -203,11 +203,11 @@ def merging(files_read):
 
             radio_var.set("/default")
 
-            def btn_click():
+            def btn_click() -> None:
                 root_s.quit()
                 root_s.destroy()
 
-            def click_close():
+            def click_close() -> None:
                 root_s.quit()
                 root_s.destroy()
 
@@ -245,7 +245,7 @@ def merging(files_read):
         root.destroy()
         sys.exit()
 
-    def click_close():
+    def click_close() -> None:
         messagebox.showinfo(
             "pdf-merger",
             "キャンセルされました。\n最初からやり直してください。",

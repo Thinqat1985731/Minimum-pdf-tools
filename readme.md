@@ -142,6 +142,10 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 - Requirementからcchardetを削除
 - Python自体の終了処理を更に追加
 
+2024/02/22
+
+- 型ヒント追加/余剰コードの削除
+
 ## Author
 
 <div align="center">

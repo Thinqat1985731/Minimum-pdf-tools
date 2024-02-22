@@ -8,11 +8,9 @@ root = Tk()
 root.withdraw()
 
 
-def compressor_check(file_read):
+def compressor_check(file_read: str) -> str:
     """
-    読み込んだファイルのリストの結合前処理（存在の確認や並べ替えなど）
-    処理後のリストを返す
-    * 状況によりcheck段階で処理を終わらせる
+    読み込んだファイルの結合前確認
     """
     if file_read != "":  # ファイルが存在する場合
         ok = messagebox.askokcancel(
@@ -42,7 +40,7 @@ def compressor_check(file_read):
         sys.exit()
 
 
-def compressing(file_read):
+def compressing(file_read: str) -> None:
     """
     ghostscriptを拝借した圧縮の本体。設定ウィンドウもあるよ。
     """
@@ -86,11 +84,11 @@ def compressing(file_read):
 
     radio_var.set("/default")
 
-    def btn_click():
+    def btn_click() -> None:
         root_s.quit()
         root_s.destroy()
 
-    def click_close():
+    def click_close() -> None:
         messagebox.showinfo(
             "pdf-compressor",
             "キャンセルされました。\n最初からやり直してください。",
