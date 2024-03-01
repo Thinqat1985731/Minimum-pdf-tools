@@ -11,7 +11,6 @@ from tkinter import (
     Tk,
     messagebox,
 )
-from typing import Any
 
 # Third Party Library
 from pypdf import PdfReader, PdfWriter
@@ -20,46 +19,13 @@ root = Tk()
 root.withdraw()
 
 
-def separator_check(file_read: str) -> str:
-    """
-    読み込んだファイルの結合前確認
-    """
-    if file_read != "":  # ファイルが存在する場合
-        ok = messagebox.askokcancel(
-            "pdf-separator",
-            "以下のファイルを分割します：\n"
-            + file_read
-            + "\nよろしければ、OKを押してください。",
-        )
-
-        if ok:
-            return file_read
-
-        else:
-            messagebox.showinfo(
-                "pdf-separator",
-                "キャンセルされました。\n最初からやり直してください。",
-            )
-            root.destroy()
-            sys.exit()
-
-    else:
-        messagebox.showerror(
-            "pdf-separator",
-            "データが選択されていません。\n最初からやり直してください。",
-        )
-        root.destroy()
-        sys.exit()
-
-
 def separating(file_read: str) -> None:
     """
     分離の本体
     """
     (name, extention) = os.path.splitext(file_read)  # 拡張子を分離
     pdf_file_reader = PdfReader(file_read)
-    page_n = len(pdf_file_reader.pages)  # ページ数を取得
-    pdf_file_writer = PdfWriter()
+    meta = pdf_file_reader.metadata  # メタデータを取得（Producer保持のため）
 
     onebyone = messagebox.askquestion(
         "pdf-separator",
@@ -68,16 +34,19 @@ def separating(file_read: str) -> None:
     )
 
     if onebyone == "yes":
-        for num in range(page_n):
+        for num in range(len(pdf_file_reader.pages)):
             file_object = pdf_file_reader.pages[
                 num
             ]  # 指定ページの内容だけ抜き出す
-            pdf_file_name = name + "-" + str(num + 1) + ".pdf"
+            pdf_name = name + "-" + str(num + 1) + ".pdf"
             pdf_file_writer = PdfWriter()
-            with open(pdf_file_name, "wb") as file:
+            with open(pdf_name, "wb") as file:
                 pdf_file_writer.add_page(
                     file_object
                 )  # 書き出したいデータを追加
+                pdf_file_writer.add_metadata(
+                    {"/Producer": meta.producer}
+                )  # 元のメタデータで上書き
                 pdf_file_writer.write(file)  # openしたファイルに書き込む
                 # with構文によりプログラムの終了時に自動的に閉じられる
 
@@ -125,7 +94,7 @@ def separating(file_read: str) -> None:
             # 境界の場所を確認し、分割用の二重配列を作成する。
             file_num = 0
             page_n_temp = 0
-            pages_one_file: list[Any] = []
+            pages_one_file = []
             pages = []
 
             for num in range(listbox.size()):
@@ -138,12 +107,15 @@ def separating(file_read: str) -> None:
             pages.append(pages_one_file)  # 最後に1個は作成
 
             for file_contents in pages:
-                pdf_file_name = name + "-" + str(file_num + 1) + ".pdf"
+                pdf_name = name + "-" + str(file_num + 1) + ".pdf"
                 pdf_file_writer = PdfWriter()
-                with open(pdf_file_name, "wb") as file:
+                with open(pdf_name, "wb") as file:
                     for page_num in file_contents:
                         file_object = pdf_file_reader.pages[page_num]
                         pdf_file_writer.add_page(file_object)
+                    pdf_file_writer.add_metadata(
+                        {"/Producer": meta.producer}
+                    )  # 元のメタデータで上書き
                     pdf_file_writer.write(file)  # openしたファイルに書き込む
                     # with構文によりプログラムの終了時に自動的に閉じられる
                 file_num = file_num + 1
@@ -170,7 +142,7 @@ def separating(file_read: str) -> None:
 
         # Listboxウィジェットを生成し、読み込んだファイルを入れる
         listbox = Listbox(frame, width=80, height=15, selectmode="signal")
-        for num in range(page_n):
+        for num in range(len(pdf_file_reader.pages)):
             page = file_read + "-" + str(num + 1) + ".pdf"
             listbox.insert(END, page)
         listbox.pack(fill="x", side="left")

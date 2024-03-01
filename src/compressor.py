@@ -4,40 +4,10 @@ import subprocess
 import sys
 from tkinter import Button, Label, Radiobutton, StringVar, Tk, messagebox
 
+from pypdf import PdfReader, PdfWriter
+
 root = Tk()
 root.withdraw()
-
-
-def compressor_check(file_read: str) -> str:
-    """
-    読み込んだファイルの結合前確認
-    """
-    if file_read != "":  # ファイルが存在する場合
-        ok = messagebox.askokcancel(
-            "pdf-compressor",
-            "以下のファイルを圧縮します：\n"
-            + file_read
-            + "\nよろしければ、OKを押してください。",
-        )
-
-        if ok:
-            return file_read
-
-        else:
-            messagebox.showinfo(
-                "pdf-compressor",
-                "キャンセルされました。\n最初からやり直してください。",
-            )
-            root.destroy()
-            sys.exit()
-
-    else:
-        messagebox.showerror(
-            "pdf-compressor",
-            "データが選択されていません。\n最初からやり直してください。",
-        )
-        root.destroy()
-        sys.exit()
 
 
 def compressing(file_read: str) -> None:
@@ -112,9 +82,12 @@ def compressing(file_read: str) -> None:
         "圧縮前のファイルを削除しますか？",
     )
 
-    file_name = file_read
+    pdf_name = file_read
+    pdf_file_reader = PdfReader(file_read)
+    meta = pdf_file_reader.metadata  # メタデータを取得（Producer保持のため）
+
     if replace == "yes":
-        file_name_temp = file_name.replace(".pdf", "_.pdf")
+        pdf_name_temp = pdf_name.replace(".pdf", "_.pdf")
         subprocess.check_output(
             [
                 "gswin64c",
@@ -123,14 +96,24 @@ def compressing(file_read: str) -> None:
                 "-dBATCH",
                 "-dNOPAUSE",
                 "-dSAFER",
-                "-sOUTPUTFILE=%s" % (file_name_temp,),
-                file_name,
+                "-sOUTPUTFILE=%s" % (pdf_name_temp,),
+                pdf_name,
             ]
         )
-        os.remove(file_name)
-        os.rename(file_name_temp, file_name)
+        os.remove(pdf_name)
+        os.rename(pdf_name_temp, pdf_name)
+        pdf_file_writer = PdfWriter()
+        with open(pdf_name, "wb") as file:
+            for page_num in len(pdf_file_reader.pages):
+                file_object = pdf_file_reader.pages[page_num]
+                pdf_file_writer.add_page(file_object)
+            pdf_file_writer.add_metadata(
+                {"/Producer": meta.producer}
+            )  # 元のメタデータで上書き
+            pdf_file_writer.write(file)  # openしたファイルに書き込む
+            # with構文によりプログラムの終了時に自動的に閉じられる
     else:
-        file_name_save = file_name.replace(".pdf", "_compressed.pdf")
+        pdf_name_save = pdf_name.replace(".pdf", "_compressed.pdf")
         subprocess.check_output(
             [
                 "gswin64c",
@@ -139,10 +122,20 @@ def compressing(file_read: str) -> None:
                 "-dBATCH",
                 "-dNOPAUSE",
                 "-dSAFER",
-                "-sOUTPUTFILE=%s" % (file_name_save,),
-                file_name,
+                "-sOUTPUTFILE=%s" % (pdf_name_save,),
+                pdf_name,
             ]
         )
+        pdf_file_writer = PdfWriter()
+        with open(pdf_name_save, "wb") as file:
+            for num in range(len(pdf_file_reader.pages)):
+                file_object = pdf_file_reader.pages[num]
+                pdf_file_writer.add_page(file_object)
+            pdf_file_writer.add_metadata(
+                {"/Producer": meta.producer}
+            )  # 元のメタデータで上書き
+            pdf_file_writer.write(file)  # openしたファイルに書き込む
+            # with構文によりプログラムの終了時に自動的に閉じられる
 
     messagebox.showinfo("pdf-compressor", "処理が完了しました。")
     root.destroy()

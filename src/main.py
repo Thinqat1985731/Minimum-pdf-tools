@@ -1,15 +1,14 @@
 # Standard Library
-import os
 import sys
-from tkinter import Button, Label, Radiobutton, StringVar, Tk, filedialog
+from tkinter import Button, Label, Radiobutton, StringVar, Tk
 
 # First Party Library
-from merger_func import merger_check, merging
-from separator_func import separating, separator_check
+from compressor import compressing
+from merger import merging
+from preprocessor import dataloader, startcheck
+from separator import separating
 
 root = Tk()
-dirname = os.path.dirname(__file__)
-iDir = os.path.abspath(dirname)
 
 root.geometry("250x240")
 root.resizable(False, False)
@@ -58,19 +57,17 @@ button.place(x=125, y=180, width=100)
 root.protocol("WM_DELETE_WINDOW", click_close)
 root.mainloop()
 
-if radio_var.get() == "pdf-merger":
-    # 複数PDFファイルを開く
-    files_read = filedialog.askopenfilenames(
-        title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
-    )
-    files_read = merger_check(files_read=files_read)
+tool = radio_var.get()
+
+files_read = dataloader(tool=radio_var.get())
+startcheck(tool=radio_var.get(), files_read=files_read)
+
+if tool == "pdf-merger":
     merging(files_read=files_read)
     sys.exit()
+elif tool == "pdf-separator":
+    separating(file_read=files_read)
+    sys.exit()
 else:
-    # 単一PDFファイルを開く
-    file_read = filedialog.askopenfilename(
-        title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
-    )
-    file_read = separator_check(file_read=file_read)
-    separating(file_read=file_read)
+    compressing(file_read=files_read)
     sys.exit()
