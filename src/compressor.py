@@ -4,6 +4,7 @@ import subprocess
 import sys
 from tkinter import Button, Label, Radiobutton, StringVar, Tk, messagebox
 
+# Third Party Library
 from pypdf import PdfReader, PdfWriter
 
 root = Tk()
@@ -104,7 +105,7 @@ def compressing(file_read: str) -> None:
         os.rename(pdf_name_temp, pdf_name)
         pdf_file_writer = PdfWriter()
         with open(pdf_name, "wb") as file:
-            for page_num in len(pdf_file_reader.pages):
+            for page_num in range(len(pdf_file_reader.pages)):
                 file_object = pdf_file_reader.pages[page_num]
                 pdf_file_writer.add_page(file_object)
             pdf_file_writer.add_metadata(

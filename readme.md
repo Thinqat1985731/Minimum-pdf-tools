@@ -152,6 +152,11 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 - **データの読み込み/前処理をpreprocessor.pyとして分離。**
 - **pdf-separator/pdf-compressorにおいてpypdfが生成ツールになるのを避けるため、メタデータ保存を実装。**
 
+2024/03/08
+
+- バグ・ライブラリ分類の修正
+- \_\_name\_\_ ==\_\_main\_\_の際の処理追加
+
 ## Author
 
 <div align="center">

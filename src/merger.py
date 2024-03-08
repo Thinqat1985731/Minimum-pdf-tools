@@ -13,11 +13,12 @@ from tkinter import (
     messagebox,
 )
 
-from compressor import compressing
-
 # Third Party Library
 from pypdf import PdfWriter
 from send2trash import send2trash
+
+# First Party Library
+from compressor import compressing
 
 dirname = os.path.dirname(__file__)
 iDir = os.path.abspath(dirname)
