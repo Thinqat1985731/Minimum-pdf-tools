@@ -1,9 +1,22 @@
 
 <div align="center">
-<img src="./images/icon_.png" width="665" alt="Logo"><br>
+<picture>
+  <source
+    srcset="./images/icon2_dark.png"
+    alt="Typing SVG"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    srcset="./images/icon2_light.png"
+    alt="Typing SVG"
+    media="(prefers-color-scheme: light)"
+  />
+  <img src="./images/icon2_ldark.png" width="665" alt="Logo">
+</picture>
+<br>
 
-![GitHub License](https://img.shields.io/github/license/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge)
-![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge)
+![GitHub License](https://img.shields.io/github/license/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge&color=C6E1E4)
+![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge&color=C6E1E4)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge)
 ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/Thinqat1985731/Minimum-pdf-tools?style=for-the-badge&label=Version)
 </div>
