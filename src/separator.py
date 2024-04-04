@@ -1,4 +1,5 @@
 # Standard Library
+import ctypes
 import os
 import sys
 from tkinter import (
@@ -15,6 +16,7 @@ from tkinter import (
 # Third Party Library
 from pypdf import PdfReader, PdfWriter
 
+ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = Tk()
 root.withdraw()
 
@@ -53,6 +55,7 @@ def separating(file_read: str) -> None:
         pdf_file_writer.close()  # writerを閉じる
         messagebox.showinfo("pdf-separator", "処理が完了しました。")
         root.destroy()
+        sys.exit()
 
     else:
         root_o = Tk()
@@ -125,7 +128,6 @@ def separating(file_read: str) -> None:
 
             root_o.quit()
             root_o.destroy()
-            sys.exit()
 
         def click_close() -> None:
             messagebox.showinfo(
@@ -134,14 +136,13 @@ def separating(file_read: str) -> None:
             )
             root_o.destroy()
             root.destroy()
-            sys.exit()
 
         # フレームの生成
         frame = Frame(root_o)
         frame.place(x=20, y=30)
 
         # Listboxウィジェットを生成し、読み込んだファイルを入れる
-        listbox = Listbox(frame, width=80, height=15, selectmode="signal")
+        listbox = Listbox(frame, width=62, height=12, selectmode="signal")
         for num in range(len(pdf_file_reader.pages)):
             page = file_read + "-" + str(num + 1) + ".pdf"
             listbox.insert(END, page)
@@ -159,7 +160,7 @@ def separating(file_read: str) -> None:
             text="分割境界を設定してください（境界の部分で分割します）。",
         )
         label.pack()
-        label.place(x=20, y=10)
+        label.place(x=20, y=5)
 
         # ボタンを定義して配置
         button_add_page = Button(
@@ -183,6 +184,5 @@ def separating(file_read: str) -> None:
 
         messagebox.showinfo("pdf-separator", "処理が完了しました。")
         root.destroy()
-        sys.exit()
 
     return

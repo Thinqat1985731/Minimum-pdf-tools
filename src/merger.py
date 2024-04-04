@@ -1,6 +1,6 @@
 # Standard Library
+import ctypes
 import os
-import sys
 from tkinter import (
     END,
     Button,
@@ -13,12 +13,14 @@ from tkinter import (
     messagebox,
 )
 
+# First Party Library
+from compressor import compressing
+
 # Third Party Library
 from pypdf import PdfWriter
 from send2trash import send2trash
 
-# First Party Library
-from compressor import compressing
+ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 dirname = os.path.dirname(__file__)
 iDir = os.path.abspath(dirname)
@@ -130,7 +132,6 @@ def merging(files_read: list[str]) -> None:
         root_o.destroy()
         root.quit()
         root.destroy()
-        sys.exit()
 
     def click_close() -> None:
         messagebox.showinfo(
@@ -139,14 +140,13 @@ def merging(files_read: list[str]) -> None:
         )
         root_o.destroy()
         root.destroy()
-        sys.exit()
 
     # フレームの生成
     frame = Frame(root_o)
     frame.place(x=20, y=30)
 
     # Listboxウィジェットを生成し、読み込んだファイルを入れる
-    listbox = Listbox(frame, width=80, height=15, selectmode="signal")
+    listbox = Listbox(frame, width=62, height=12, selectmode="signal")
     for pdf_name in files_read:
         listbox.insert(END, pdf_name)
     listbox.pack(fill="x", side="left")
@@ -163,7 +163,7 @@ def merging(files_read: list[str]) -> None:
         text="PDFの結合順を設定してください（上から順に結合します）。",
     )
     label.pack()
-    label.place(x=20, y=10)
+    label.place(x=20, y=5)
 
     # ボタンを定義して配置
     button_add_page = Button(
@@ -184,4 +184,5 @@ def merging(files_read: list[str]) -> None:
 
     root_o.protocol("WM_DELETE_WINDOW", click_close)
     root_o.mainloop()
+
     return

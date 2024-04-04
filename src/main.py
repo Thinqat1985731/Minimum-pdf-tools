@@ -1,4 +1,5 @@
 # Standard Library
+import ctypes
 import sys
 from tkinter import Button, Label, Radiobutton, StringVar, Tk
 
@@ -9,6 +10,7 @@ from preprocessor import dataloader, startcheck
 from separator import separating
 
 if __name__ == "__main__":
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
     root = Tk()
 
     root.geometry("250x240")

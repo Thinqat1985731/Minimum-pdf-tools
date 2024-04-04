@@ -1,12 +1,13 @@
 # Standard Library
+import ctypes
 import os
 import subprocess
-import sys
 from tkinter import Button, Label, Radiobutton, StringVar, Tk, messagebox
 
 # Third Party Library
 from pypdf import PdfReader, PdfWriter
 
+ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = Tk()
 root.withdraw()
 
@@ -66,7 +67,6 @@ def compressing(file_read: str) -> None:
         )
         root_s.destroy()
         root.destroy()
-        sys.exit()
 
     label = Label(root_s, text="圧縮の設定を選んでください。")
     label.pack()
@@ -140,4 +140,5 @@ def compressing(file_read: str) -> None:
 
     messagebox.showinfo("pdf-compressor", "処理が完了しました。")
     root.destroy()
+
     return

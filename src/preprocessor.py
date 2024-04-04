@@ -1,4 +1,5 @@
 # Standard Library
+import ctypes
 import os
 import sys
 from tkinter import filedialog, messagebox
@@ -8,6 +9,7 @@ iDir = os.path.abspath(dirname)
 
 
 def dataloader(tool: str) -> list[str] | str:
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
     if tool == "pdf-merger":
         # 複数PDFファイルを開く
         files_read = filedialog.askopenfilenames(
@@ -22,6 +24,7 @@ def dataloader(tool: str) -> list[str] | str:
 
 
 def startcheck(tool: str, files_read: list[str] | str) -> None:
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
     if files_read != "":  # ファイルが存在する場合
         files_found = ""
         for file_name in files_read:
