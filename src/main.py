@@ -23,19 +23,19 @@ if __name__ == "__main__":
         root, value="pdf-merger", variable=radio_var, text="pdf-merger"
     )
     radio1.pack()
-    radio1.place(x=20, y=82)
+    radio1.place(x=20, y=75)
 
     radio2 = Radiobutton(
         root, value="pdf-separator", variable=radio_var, text="pdf-separator"
     )
     radio2.pack()
-    radio2.place(x=20, y=104)
+    radio2.place(x=20, y=100)
 
     radio3 = Radiobutton(
         root, value="pdf-compressor", variable=radio_var, text="pdf-compressor"
     )
     radio3.pack()
-    radio3.place(x=20, y=126)
+    radio3.place(x=20, y=125)
 
     radio_var.set("pdf-merger")
 
@@ -44,6 +44,7 @@ if __name__ == "__main__":
         root.destroy()
 
     def click_close() -> None:
+        root.quit()
         root.destroy()
         sys.exit()
 

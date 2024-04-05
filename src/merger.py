@@ -138,7 +138,9 @@ def merging(files_read: list[str]) -> None:
             "pdf-merger",
             "キャンセルされました。\n最初からやり直してください。",
         )
+        root_o.quit()
         root_o.destroy()
+        root.quit()
         root.destroy()
 
     # フレームの生成
@@ -163,7 +165,7 @@ def merging(files_read: list[str]) -> None:
         text="PDFの結合順を設定してください（上から順に結合します）。",
     )
     label.pack()
-    label.place(x=20, y=5)
+    label.place(x=20, y=3)
 
     # ボタンを定義して配置
     button_add_page = Button(

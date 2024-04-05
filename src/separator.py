@@ -1,7 +1,6 @@
 # Standard Library
 import ctypes
 import os
-import sys
 from tkinter import (
     END,
     Button,
@@ -54,8 +53,8 @@ def separating(file_read: str) -> None:
 
         pdf_file_writer.close()  # writerを閉じる
         messagebox.showinfo("pdf-separator", "処理が完了しました。")
+        root.quit()
         root.destroy()
-        sys.exit()
 
     else:
         root_o = Tk()
@@ -128,13 +127,17 @@ def separating(file_read: str) -> None:
 
             root_o.quit()
             root_o.destroy()
+            root.quit()
+            root.destroy()
 
         def click_close() -> None:
             messagebox.showinfo(
                 "pdf-separator",
                 "キャンセルされました。\n最初からやり直してください。",
             )
+            root_o.quit()
             root_o.destroy()
+            root.quit()
             root.destroy()
 
         # フレームの生成
@@ -160,7 +163,7 @@ def separating(file_read: str) -> None:
             text="分割境界を設定してください（境界の部分で分割します）。",
         )
         label.pack()
-        label.place(x=20, y=5)
+        label.place(x=20, y=3)
 
         # ボタンを定義して配置
         button_add_page = Button(
@@ -181,8 +184,5 @@ def separating(file_read: str) -> None:
 
         root_o.protocol("WM_DELETE_WINDOW", click_close)
         root_o.mainloop()
-
-        messagebox.showinfo("pdf-separator", "処理が完了しました。")
-        root.destroy()
 
     return
