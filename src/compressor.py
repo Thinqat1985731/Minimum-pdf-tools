@@ -89,9 +89,10 @@ def compressing(file_read: str) -> None:
                 for page_num in range(len(pdf_file_reader.pages)):
                     file_object = pdf_file_reader.pages[page_num]
                     pdf_file_writer.add_page(file_object)
-                pdf_file_writer.add_metadata(
-                    {"/Producer": meta.producer}
-                )  # 元のメタデータで上書き
+                if meta.producer != "":
+                    pdf_file_writer.add_metadata(
+                        {"/Producer": meta.producer}
+                    )  # 元のメタデータで上書き
                 pdf_file_writer.write(file)  # openしたファイルに書き込む
                 # with構文によりプログラムの終了時に自動的に閉じられる
         else:
