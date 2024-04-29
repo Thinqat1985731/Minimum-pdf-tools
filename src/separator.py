@@ -24,7 +24,7 @@ def separating(file_read: str) -> None:
     """
     分離の本体
     """
-    (name, extention) = os.path.splitext(file_read)  # 拡張子を分離
+    (name, _) = os.path.splitext(file_read)  # 拡張子を分離
     pdf_file_reader = PdfReader(file_read)
     meta = pdf_file_reader.metadata  # メタデータを取得（Producer保持のため）
 

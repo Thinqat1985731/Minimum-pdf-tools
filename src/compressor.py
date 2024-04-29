@@ -86,8 +86,7 @@ def compressing(file_read: str) -> None:
             os.rename(pdf_name_temp, pdf_name)
             pdf_file_writer = PdfWriter()
             with open(pdf_name, "wb") as file:
-                for page_num in range(len(pdf_file_reader.pages)):
-                    file_object = pdf_file_reader.pages[page_num]
+                for _, file_object in enumerate(pdf_file_reader.pages):
                     pdf_file_writer.add_page(file_object)
                 if meta is not None:
                     pdf_file_writer.add_metadata(
@@ -111,8 +110,7 @@ def compressing(file_read: str) -> None:
             )
             pdf_file_writer = PdfWriter()
             with open(pdf_name_save, "wb") as file:
-                for num in range(len(pdf_file_reader.pages)):
-                    file_object = pdf_file_reader.pages[num]
+                for _, file_object in enumerate(pdf_file_reader.pages):
                     pdf_file_writer.add_page(file_object)
                 if meta is not None:
                     pdf_file_writer.add_metadata(
