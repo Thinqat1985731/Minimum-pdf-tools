@@ -23,7 +23,7 @@ from send2trash import send2trash
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 dirname = os.path.dirname(__file__)
-iDir = os.path.abspath(dirname)
+initial_dir = os.path.abspath(dirname)
 root = Tk()
 root.withdraw()
 
@@ -93,7 +93,7 @@ def merging(files_read: list[str]) -> None:
         pdf_name_save = filedialog.asksaveasfilename(
             title="結合したファイルを名前を付けて保存",
             filetypes=[("PDF file", "*.pdf")],
-            initialdir=iDir,
+            initialdir=initial_dir,
         )
 
         if pdf_name_save.rfind(".pdf") == -1:
