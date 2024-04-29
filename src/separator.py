@@ -35,10 +35,7 @@ def separating(file_read: str) -> None:
     )
 
     if onebyone == "yes":
-        for num in range(len(pdf_file_reader.pages)):
-            file_object = pdf_file_reader.pages[
-                num
-            ]  # 指定ページの内容だけ抜き出す
+        for num, file_object in enumerate(pdf_file_reader.pages):
             pdf_name = name + "-" + str(num + 1) + ".pdf"
             pdf_file_writer = PdfWriter()
             with open(pdf_name, "wb") as file:

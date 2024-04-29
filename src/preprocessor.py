@@ -5,7 +5,7 @@ import sys
 from tkinter import filedialog, messagebox
 
 dirname = os.path.dirname(__file__)
-iDir = os.path.abspath(dirname)
+initial_dir = os.path.abspath(dirname)
 
 
 def dataloader(tool: str) -> list[str] | str:
@@ -13,12 +13,16 @@ def dataloader(tool: str) -> list[str] | str:
     if tool == "pdf-merger":
         # 複数PDFファイルを開く
         files_read = filedialog.askopenfilenames(
-            title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+            title="開く",
+            filetypes=[("PDF file", "*.pdf")],
+            initialdir=initial_dir,
         )
     else:
         # 単一PDFファイルを開く
         files_read = filedialog.askopenfilename(
-            title="開く", filetypes=[("PDF file", "*.pdf")], initialdir=iDir
+            title="開く",
+            filetypes=[("PDF file", "*.pdf")],
+            initialdir=initial_dir,
         )
     return files_read
 
