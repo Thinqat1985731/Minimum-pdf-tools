@@ -24,6 +24,17 @@
 
 pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツール（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
 
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Requirement](#requirement)
+- [Usage](#usage)
+- [Directory Structure](#directory-structure)
+- [Features](#features)
+- [History](#history)
+- [Author](#author)
+- [Lisence](#lisence)
+
 ## Requirement
 
 - pypdf
@@ -34,6 +45,28 @@ pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとし
 ## Usage
 
 Requirementにあるパッケージを入れたPython環境（仮想でも生でもよい）とGhostscriptをまずは用意し、そのうえでsrcに入っているmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。
+
+## Directory Structure
+
+```rawtext
+.
+├─ images
+│   ├── icon_.png
+│   ├── icon.png
+│   ├── icon2_dark.png
+│   ├── icon2_light.png
+│   └── icon2.png
+├─ src
+│   ├── __init__.py
+│   ├── compressor.py
+│   ├── main.py
+│   ├── merger.py
+│   ├── preprocessor.py
+│   └── separator.py
+├── .gitignore
+├── LICENSE
+└── readme.md
+```
 
 ## Features
 
@@ -186,6 +219,10 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 2024/04/29
 
 - 不要な変数／記述の削除
+
+2024/06/22
+
+- readme.mdに目次/ディレクトリ構造を追加
 
 ## Author
 
