@@ -1,4 +1,6 @@
 
+<a id="readme-top"></a>
+
 <div align="center">
 <picture>
   <source
@@ -22,52 +24,23 @@
 </div>
 <br>
 
-pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツール（初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています）。
+<details>
+  <summary>Table of Contents</summary>
 
-## Table of Contents <!-- omit in toc -->
-
-- [Requirement](#requirement)
+- [About This Project](#about-this-project)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Usage](#usage)
-- [Directory Structure](#directory-structure)
-- [Features](#features)
 - [History](#history)
-- [Author](#author)
 - [Lisence](#lisence)
+- [Contact](#contact)
 
-## Requirement
+</details>
 
-- pypdf
-- send2trash
-- charset-normalizer
-- chardet
+## About This Project
 
-## Usage
-
-Requirementにあるパッケージを入れたPython環境（仮想でも生でもよい）とGhostscriptをまずは用意し、そのうえでsrcに入っているmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。
-
-## Directory Structure
-
-```rawtext
-.
-├─ images
-│   ├── icon_.png
-│   ├── icon.png
-│   ├── icon2_dark.png
-│   ├── icon2_light.png
-│   └── icon2.png
-├─ src
-│   ├── __init__.py
-│   ├── compressor.py
-│   ├── main.py
-│   ├── merger.py
-│   ├── preprocessor.py
-│   └── separator.py
-├── .gitignore
-├── LICENSE
-└── readme.md
-```
-
-## Features
+pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとしたUIを付けるツールです。特徴といえそうなのは以下です。
 
 - 単一のmain.pyからツールの分岐を行う。
 - 順番を指定してPDFを結合することができる。
@@ -75,6 +48,53 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 - 結合後の元PDFの削除およびGhostscriptによる結合結果PDFの圧縮に対応。
 - PDFを1ページ毎または指定した境界で分離することができる。
 - GhostscriptによるPDFの圧縮にUIを付与。
+
+> 初期はPyPDF2を検討しておりましたが、[PyPDF2のPypiサイト](https://pypi.org/project/PyPDF2/)によれば「v3.0.X（2022/12/31リリース）で開発を停止してルーツであるpypdfで開発を続ける」とのことだったので、pypdfを利用しています。
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## Getting Started
+
+### Prerequisites
+
+- 仮想環境での動作を想定しています。
+
+  ```shell
+  python -m venv ci_env
+  (for linux  ) source ci_env/bin/activate
+  (for windows) .\ci_env\Scripts\activate
+  ```
+
+- PDFの圧縮において、**GhostScript**が存在する前提で組んでいるため、事前にインストールが必要です。
+公式のインストールページは[こちら](https://ghostscript.com/releases/gsdnld.html)。
+
+### Installation
+
+1. このリポジトリをクローンする。
+
+     ```shell
+     git clone https://github.com/Thinqat1985731/hydra-test.git
+     ```
+
+2. 関連するpythonライブラリをインストールする。
+
+     ```shell
+     pip install pypdf
+     pip install send2trash
+     pip install charset-normalizer
+     pip install chardet
+     ```
+
+    > PoetryやRyeでtomlファイルを作成し、インストールしても可。
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+
+Requirementにあるパッケージを入れたPython環境（仮想でも生でもよい）とGhostscriptをまずは用意し、そのうえでsrcに入っているmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## History
 
@@ -223,13 +243,63 @@ Requirementにあるパッケージを入れたPython環境（仮想でも生で
 
 - readme.mdに目次/ディレクトリ構造を追加
 
-## Author
+2024/06/30
 
-<div align="center">
-<img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="100" height="100" alt="avator"><br>
-<strong>Thinqat(Thinqat1985731)</strong>
-</div>
+- readme.mdの構成を大幅に変更
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Lisence
 
-This project is licensed under the MIT License, see the LICENSE file for details
+This project is licensed under the MIT License, see the [LICENSE file](LICENSE) for details.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Contact
+
+<div align="center">
+   <img src="https://avatars.githubusercontent.com/u/113882060?v=4" width="100" height="100" alt="avator"><br>
+   <strong>Thinqat(Thinqat1985731)</strong><br><br>
+
+  <a href="https://github.com/Thinqat1985731" target="_blank">
+  <picture>
+    <source
+      srcset="https://img.shields.io/badge/GitHub-444444.svg?style=for-the-badge&logo=github"
+      media="(prefers-color-scheme: dark)"
+    />
+    <source
+      srcset="https://img.shields.io/badge/GitHub-000000.svg?style=for-the-badge&logo=github"
+      media="(prefers-color-scheme: light)"
+    />
+    <img src="https://img.shields.io/badge/-Github-444444.svg?style=for-the-badge&logo=github" alt="Github"/>
+  </picture>
+  </a>
+  <a href="https://huggingface.co/Thinqat1985731" target="_blank">
+    <picture>
+      <source
+        srcset="https://img.shields.io/badge/Hugging_Face-444444.svg?style=for-the-badge"
+        media="(prefers-color-scheme: dark)"
+      />
+      <source
+        srcset="https://img.shields.io/badge/Hugging_Face-000000.svg?style=for-the-badge"
+        media="(prefers-color-scheme: light)"
+      />
+      <img src="https://img.shields.io/badge/Hugging_Face-444444.svg?style=for-the-badge" alt="Hugging Face"/>
+    </picture>
+  </a>
+  <a href="https://thinqat.vercel.app/" target="_blank">
+    <picture>
+    <source
+      srcset="https://img.shields.io/badge/Myblog-444444.svg?style=for-the-badge&logo=nextdotjs"
+      media="(prefers-color-scheme: dark)"
+    />
+    <source
+      srcset="https://img.shields.io/badge/Myblog-000000.svg?style=for-the-badge&logo=nextdotjs"
+      media="(prefers-color-scheme: light)"
+    />
+    <img src="https://img.shields.io/badge/Myblog-444444.svg?style=for-the-badge&logo=nextdotjs" alt="Myblog"/>
+  </picture>
+  </a>
+</div>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
