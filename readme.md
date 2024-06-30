@@ -53,7 +53,6 @@ pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとし
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 ## Getting Started
 
 ### Prerequisites
@@ -92,7 +91,12 @@ pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとし
 
 ## Usage
 
-Requirementにあるパッケージを入れたPython環境（仮想でも生でもよい）とGhostscriptをまずは用意し、そのうえでsrcに入っているmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。
+src内のmain.pyを実行する。そうすればTkinterによるダイアログがぼちぼち出てくるのでそれに従う感じ。
+
+```shell
+cd src
+python main.py
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
