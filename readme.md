@@ -73,7 +73,7 @@ pypdfによるPDF結合・分割/GhostscriptによるPDF圧縮にちょっとし
 1. このリポジトリをクローンする。
 
      ```shell
-     git clone https://github.com/Thinqat1985731/hydra-test.git
+     git clone https://github.com/Thinqat1985731/Minimum-pdf-tools.git
      ```
 
 2. 関連するpythonライブラリをインストールする。
@@ -250,6 +250,10 @@ python main.py
 2024/06/30
 
 - readme.mdの構成を大幅に変更
+
+2024/07/01
+
+- readme.mdを修正
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
