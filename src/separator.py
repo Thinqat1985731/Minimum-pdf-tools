@@ -11,22 +11,26 @@ from tkinter import (
     Tk,
     messagebox,
 )
+from zoneinfo import ZoneInfo
 
 # Third Party Library
 from pypdf import PdfReader, PdfWriter
+
+from common import metamaker
 
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = Tk()
 root.withdraw()
 
 
-def separating(file_read: str) -> None:
+def separating(file_read: str, tzinfo: list[ZoneInfo, str]) -> None:
     """
     分離の本体
     """
     (name, _) = os.path.splitext(file_read)  # 拡張子を分離
     pdf_file_reader = PdfReader(file_read)
-    meta = pdf_file_reader.metadata  # メタデータを取得（Producer保持のため）
+    meta = pdf_file_reader.metadata  # メタデータを取得
+    print(meta)
 
     onebyone = messagebox.askquestion(
         "pdf-separator",
@@ -42,10 +46,8 @@ def separating(file_read: str) -> None:
                 pdf_file_writer.add_page(
                     file_object
                 )  # 書き出したいデータを追加
-                if meta is not None:
-                    pdf_file_writer.add_metadata(
-                        {"/Producer": meta.producer}
-                    )  # 元のメタデータで上書き
+                new_meta = metamaker(tzinfo, meta)
+                pdf_file_writer.add_metadata(new_meta)
                 pdf_file_writer.write(file)  # openしたファイルに書き込む
                 # with構文によりプログラムの終了時に自動的に閉じられる
 
@@ -113,10 +115,8 @@ def separating(file_read: str) -> None:
                     for page_num in file_contents:
                         file_object = pdf_file_reader.pages[page_num]
                         pdf_file_writer.add_page(file_object)
-                    if meta is not None:
-                        pdf_file_writer.add_metadata(
-                            {"/Producer": meta.producer}
-                        )  # 元のメタデータで上書き
+                    new_meta = metamaker(tzinfo, meta)
+                    pdf_file_writer.add_metadata(new_meta)
                     pdf_file_writer.write(file)  # openしたファイルに書き込む
                     # with構文によりプログラムの終了時に自動的に閉じられる
                 file_num = file_num + 1

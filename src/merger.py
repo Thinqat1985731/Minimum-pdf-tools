@@ -12,13 +12,16 @@ from tkinter import (
     filedialog,
     messagebox,
 )
-
-# First Party Library
-from compressor import compressing
+from zoneinfo import ZoneInfo
 
 # Third Party Library
 from pypdf import PdfWriter
 from send2trash import send2trash
+
+from common import metamaker
+
+# First Party Library
+from compressor import compressing
 
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
@@ -28,7 +31,7 @@ root = Tk()
 root.withdraw()
 
 
-def merging(files_read: list[str]) -> None:
+def merging(files_read: list[str], tzinfo: list[ZoneInfo, str]) -> None:
     """
     結合の本体
     """
@@ -101,6 +104,8 @@ def merging(files_read: list[str]) -> None:
             # 右から検索して.pdfが無かったら勝手に付け足す
 
         with open(pdf_name_save, "wb") as file:
+            new_meta = metamaker(tzinfo)
+            pdf_file_merger.add_metadata(new_meta)
             pdf_file_merger.write(file)
         pdf_file_merger.close()  # writer を閉じる
 
@@ -168,9 +173,7 @@ def merging(files_read: list[str]) -> None:
     label.place(x=20, y=3)
 
     # ボタンを定義して配置
-    button_add_page = Button(
-        root_o, text="空白のﾍﾟｰｼﾞを追加", command=add_page
-    )
+    button_add_page = Button(root_o, text="空白のﾍﾟｰｼﾞを追加", command=add_page)
     button_delete_page = Button(
         root_o, text="空白のﾍﾟｰｼﾞを削除", command=delete_page
     )

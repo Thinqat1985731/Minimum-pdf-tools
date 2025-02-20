@@ -3,16 +3,19 @@ import ctypes
 import os
 import subprocess
 from tkinter import Button, Label, Radiobutton, StringVar, Tk, messagebox
+from zoneinfo import ZoneInfo
 
 # Third Party Library
 from pypdf import PdfReader, PdfWriter
+
+from common import metamaker
 
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = Tk()
 root.withdraw()
 
 
-def compressing(file_read: str) -> None:
+def compressing(file_read: str, tzinfo: list[ZoneInfo, str]) -> None:
     """
     ghostscriptを拝借した圧縮の本体。設定ウィンドウもあるよ。
     """
@@ -64,9 +67,7 @@ def compressing(file_read: str) -> None:
 
         pdf_name = file_read
         pdf_file_reader = PdfReader(file_read)
-        meta = (
-            pdf_file_reader.metadata
-        )  # メタデータを取得（Producer保持のため）
+        meta = pdf_file_reader.metadata  # メタデータを取得
 
         if replace == "yes":
             pdf_name_temp = pdf_name.replace(".pdf", "_.pdf")
@@ -89,9 +90,8 @@ def compressing(file_read: str) -> None:
                 for _, file_object in enumerate(pdf_file_reader.pages):
                     pdf_file_writer.add_page(file_object)
                 if meta is not None:
-                    pdf_file_writer.add_metadata(
-                        {"/Producer": meta.producer}
-                    )  # 元のメタデータで上書き
+                    new_meta = metamaker(tzinfo, meta)
+                    pdf_file_writer.add_metadata(new_meta)
                 pdf_file_writer.write(file)  # openしたファイルに書き込む
                 # with構文によりプログラムの終了時に自動的に閉じられる
         else:
@@ -112,10 +112,8 @@ def compressing(file_read: str) -> None:
             with open(pdf_name_save, "wb") as file:
                 for _, file_object in enumerate(pdf_file_reader.pages):
                     pdf_file_writer.add_page(file_object)
-                if meta is not None:
-                    pdf_file_writer.add_metadata(
-                        {"/Producer": meta.producer}
-                    )  # 元のメタデータで上書き
+                new_meta = metamaker(tzinfo, meta)
+                pdf_file_writer.add_metadata(new_meta)
                 pdf_file_writer.write(file)  # openしたファイルに書き込む
                 # with構文によりプログラムの終了時に自動的に閉じられる
 

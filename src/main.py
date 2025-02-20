@@ -4,12 +4,13 @@ import sys
 from tkinter import Button, Label, Radiobutton, StringVar, Tk
 
 # First Party Library
+from common import dataloader, startchecker, timezonesetter
 from compressor import compressing
 from merger import merging
-from preprocessor import dataloader, startcheck
 from separator import separating
 
 if __name__ == "__main__":
+    # ツール選択
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
     root = Tk()
 
@@ -57,18 +58,23 @@ if __name__ == "__main__":
 
     root.protocol("WM_DELETE_WINDOW", click_close)
     root.mainloop()
-
     tool = radio_var.get()
 
-    files_read = dataloader(tool=radio_var.get())
-    startcheck(tool=radio_var.get(), files_read=files_read)
+    # タイムゾーン選択
+    tzinfo = timezonesetter()
+    print(tzinfo)
 
+    # 処理開始の確認
+    files_read = dataloader(tool=radio_var.get())
+    startchecker(tool=radio_var.get(), files_read=files_read)
+
+    # 実際の処理
     if tool == "pdf-merger":
-        merging(files_read=files_read)
+        merging(files_read=files_read, tzinfo=tzinfo)
         sys.exit()
     elif tool == "pdf-separator":
-        separating(file_read=files_read)
+        separating(file_read=files_read, tzinfo=tzinfo)
         sys.exit()
     else:
-        compressing(file_read=files_read)
+        compressing(file_read=files_read, tzinfo=tzinfo)
         sys.exit()
