@@ -96,7 +96,7 @@ src内の`main.py`を実行する。そうすればTkinterによるダイアロ�
 
 ```shell
 cd src
-python `main.py`
+python main.py
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -187,7 +187,7 @@ python `main.py`
 
 - f-stringsでエラーが発生したため、元に戻す
 - tkinterによるウィンドウのresizableを縦横ともにFalseに設定
-- icon.pngが正方形に近くなるように整形
+- `icon.png`が正方形に近くなるように整形
 
 2024/01/25 (v5.0.2)
 
