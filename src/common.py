@@ -55,7 +55,6 @@ def timezonesetter() -> list[ZoneInfo, int]:
     check.place(x=20, y=125)
 
     def btn_click() -> int:
-        print(string_var.get())
         root_z.quit()
         root_z.destroy()
 

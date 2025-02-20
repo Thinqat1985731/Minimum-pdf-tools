@@ -30,7 +30,6 @@ def separating(file_read: str, tzinfo: list[ZoneInfo, str]) -> None:
     (name, _) = os.path.splitext(file_read)  # 拡張子を分離
     pdf_file_reader = PdfReader(file_read)
     meta = pdf_file_reader.metadata  # メタデータを取得
-    print(meta)
 
     onebyone = messagebox.askquestion(
         "pdf-separator",

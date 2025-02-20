@@ -62,7 +62,6 @@ if __name__ == "__main__":
 
     # タイムゾーン選択
     tzinfo = timezonesetter()
-    print(tzinfo)
 
     # 処理開始の確認
     files_read = dataloader(tool=radio_var.get())
