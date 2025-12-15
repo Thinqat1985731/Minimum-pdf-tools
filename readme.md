@@ -254,6 +254,9 @@ python main.py
 - `readme.md`のブログリンク変更と説明追加・表記更新
 - version表記を変更
 
+2025/12/16
+- uvへの移行に伴う`.gitignore`の変更
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Lisence

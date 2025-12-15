@@ -128,11 +128,10 @@ ENV/
 env.bak/
 venv.bak/
 
-# rye settings
+# uv settings
 .python-version
 pyproject.toml
-requirements.lock
-requirements-dev.lock
+uv.lock
 
 # Spyder project settings
 .spyderproject
